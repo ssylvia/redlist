@@ -1,0 +1,201 @@
+html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input,hr {margin:0; padding:0;}
+html,body{height:100%;width:100%;overflow:hidden; font-family:Georgia, "Times New Roman", Times, serif; color:#444;}
+h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,th {font-weight:normal; font-style:normal; font-family:Arial, Helvetica, sans-serif; color:#fff;}
+ul,ol {list-style:none;}
+fieldset,img,hr {border:none; outline:none;}
+caption,th {text-align:left;}
+table {border-collapse:collapse; border-spacing:0;}
+
+.tundra .dijitSplitContainer-dijitContentPane, .tundra .dijitBorderContainer-dijitContentPane, .tundra .dijitBorderContainer, .tundra .dijitSplitterV, .tundra .dijitGutterV, .tundra .dijitSplitContainer-child, .tundra .dijitBorderContainer-child{
+    background:none;
+	padding:0;
+	border:none;
+}
+
+a{
+    color:#000;
+}
+
+#mainWindow{
+    position:absolute;
+	top:0px;
+	height:100%;
+	width:100%;
+}
+
+#banner{
+    width:100%;
+    height:115px;
+    background-color:#d81e05;
+}
+
+#headerArea{
+    height:115px;
+	padding:20px 25px 0px 25px;
+}
+
+#iucnLogo{
+	height:100%;
+	width:110px;
+}
+
+#iucnLogoImg{
+	height:75px;
+}
+
+#title{
+    font-weight:bold;
+    font-size:20px;
+	font-family:Arial, Helvetica, sans-serif;
+    padding-bottom:10px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow:ellipsis;
+}
+
+#subtitle{
+	color:#fff;
+    overflow: hidden;
+}
+
+#logoArea{
+	width:150px !important;
+	overflow:hidden;
+}
+
+#social,#logo{
+	float:right;
+}
+
+#social{
+	padding-bottom:20px;
+}
+
+#smLink{
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:0.82em;
+	text-decoration:none;
+	outline:none;
+}
+
+#smLink:hover{
+	text-decoration:underline;
+}
+
+#sidePanel{
+    height:100%;
+    width:300px;
+}
+
+#topPanel{
+	width:100%;
+	height:260px;
+	padding:25px 25px 0 25px;
+}
+
+#speciesList{
+	padding:0 25px 25px 25px;
+	color:#848484;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+.speciesItem{
+	font-weight:bold;
+	padding:3px 0 3px 0;
+}
+
+.speciesItem:hover{
+	color:#000;
+	cursor:pointer;
+}
+
+#speciesHeader{
+	border-top:1px solid #d81e05;
+	margin-top:25px;
+	padding-top:5px;
+	color:#d81e05;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+}
+
+#selectorCon{
+	height:120px;
+	width:100%;
+}
+
+#selector{
+	width:95%;
+	margin:auto;
+	margin-top:20px;
+	text-align:center;
+	font-size:10px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	cursor:pointer;
+}
+
+.sc{
+	padding:5px 10px 5px 10px;
+}
+
+.greyScheme{
+	background-color:#848484;
+	color:#fff;
+	border-top:1px solid #848484;
+	border-bottom:1px solid #848484;
+	border-right:3px solid;
+}
+
+.blackScheme{
+	background-color:#000;
+	color:#fff;
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+}
+
+.whiteScheme{
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+}
+
+#selectorImg{
+	position:absolute;
+	background:url(../images/slider.png) ;
+	width:140px;
+	height:140px;
+	bottom:10px;
+	text-align:center;
+	vertical-align:middle;
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bolder;
+	font-size:13px;
+	z-index:20;
+	cursor:move;
+}
+
+#selAbr{
+	position:absolute;
+}
+
+#selectedText{
+	padding:22px;
+}
+
+#shadowDiv{
+	position:absolute;
+	height:100%;
+	left:-10px;
+	width:10px;
+	-moz-box-shadow: 5px 0px 20px 5px #666;
+	-webkit-box-shadow: 5px 0px 20px 5px #666;
+	box-shadow: 5px 0px 20px 5px #666;
+	filter: progid: DXImageTransform.Microsoft.Shadow(strength = 5, direction = 90, color = '#666');
+	-ms-filter: "progid: DXImageTransform.Microsoft.Shadow(strength = 5, Direction = 90, Color = '#666')";
+	z-index:20;
+}
