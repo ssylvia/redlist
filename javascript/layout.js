@@ -13,16 +13,16 @@ $(document).ready(function(e) {
 		axis : "x",
 		containment : "#selector",
 		drag : function(){
-			if(checkSelection() == "LC"){
+			if(checkSelection() === "LC"){
 				$("#selectedText").html("LEAST<br>CONCERN");
 			}
-			else if(checkSelection() == "NT"){
+			else if(checkSelection() === "NT"){
 				$("#selectedText").html("NEAR<br>THREATENED");
 			}
-			else if(checkSelection() == "VU"){
+			else if(checkSelection() === "VU"){
 				$("#selectedText").html("VULNERABLE");
 			}
-			else if(checkSelection() == "EN"){
+			else if(checkSelection() === "EN"){
 				$("#selectedText").html("ENDANGERED");
 			}
 			else{

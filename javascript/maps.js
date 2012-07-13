@@ -12,7 +12,7 @@ var _map,
 
 var initMap = function(){
 	
-	var initExtent = new esri.geometry.Extent({"xmin":-18843867.70908305,"ymin":-13267022.125398085,"xmax":19509175.60327705,"ymax":15223810.049497988,"spatialReference":{"wkid":102100}});
+	var initExtent = new esri.geometry.Extent({"xmin":-15440190.518952178,"ymin":-4384014.805557845,"xmax":16259773.85146766,"ymax":10174487.34974608,"spatialReference":{"wkid":102100}});
 	
 	_map = new esri.Map("map",{
 		extent:initExtent,
@@ -61,25 +61,25 @@ var addPoints = function(){
 		var attr = ftr.attributes;
 		
 		var sym;
-		if(attr.class == "MAMMALIA"){
+		if(attr.class === "MAMMALIA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Mammal_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.class == "REPTILIA"){
+		else if(attr.class === "REPTILIA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Reptile_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.class == "INSECTA"){
+		else if(attr.class === "INSECTA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Insect_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.class == "CRUSTACEA"){
+		else if(attr.class === "CRUSTACEA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Crustacean_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.class == "GASTROPODA"){
+		else if(attr.class === "GASTROPODA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Gastropod_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.class == "AMPHIBIA"){
+		else if(attr.class === "AMPHIBIA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Amphibian_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.kingdom == "PLANTAE"){
+		else if(attr.kingdom === "PLANTAE"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Plant_icon.png', 31, 25).setOffset(8,12);
 		}
 		else{
@@ -96,16 +96,16 @@ var addPoints = function(){
 
 var sortGraphics = function(){
 	var arg;
-	if ($("#selectedText").html() == "LEAST<br>CONCERN"){
+	if ($("#selectedText").html() === "LEAST<br>CONCERN"){
 		arg = "LC";
 	}
-	else if ($("#selectedText").html() == "NEAR<br>THREATENED"){
+	else if ($("#selectedText").html() === "NEAR<br>THREATENED"){
 		arg = "NT";
 	}
-	else if ($("#selectedText").html() == "VULNERABLE"){
+	else if ($("#selectedText").html() === "VULNERABLE"){
 		arg = "VU";
 	}
-	else if ($("#selectedText").html() == "ENDANGERED"){
+	else if ($("#selectedText").html() === "ENDANGERED"){
 		arg = "EN";
 	}
 	else{

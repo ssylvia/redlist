@@ -1,4 +1,4 @@
-_pointData = {
+var _pointData = {
   "objectIdFieldName" : "OBJECTID", 
   "globalIdFieldName" : "", 
   "geometryType" : "esriGeometryPoint", 
