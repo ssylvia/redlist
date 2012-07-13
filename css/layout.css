@@ -113,6 +113,22 @@ a{
 	cursor:pointer;
 }
 
+.selectedItem{
+    color:#000;
+}
+
+.arrow{
+    display:none;
+    position:absolute;
+    width: 0;
+    height: 0;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid #d81e05;
+    margin-left:10px;
+    margin-top:-3px;
+}
+
 #speciesHeader{
 	border-top:1px solid #d81e05;
 	margin-top:25px;
