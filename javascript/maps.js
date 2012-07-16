@@ -41,7 +41,7 @@ var initMap = function(){
 	dojo.connect(_points,"onMouseOver",function(event){
 		_map.setCursor("pointer");
 		event.graphic.setSymbol(event.graphic.symbol.setHeight(30).setWidth(37).setOffset(10,14));
-        $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + event.graphic.attributes.COMMON_NAME + "</td><td id='arrowCon' rowspan='2'><button id='closeButton'></button><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/250px-Siberischer_tiger_de_edit02.jpg' alt='" + event.graphic.attributes.COMMON_NAME + "'</td></tr></table>");
+        $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + event.graphic.attributes.COMMON_NAME + "</td><td id='arrowCon' rowspan='2'><button id='closeButton'></button><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/250px-Siberischer_tiger_de_edit02.jpg' alt='" + event.graphic.attributes.COMMON_NAME + "'</td></tr></table>").data("attr",event.graphic.attributes);
         positionHoverInfo(event.graphic.geometry);
         $("#closeButton").button({
             icons: {
@@ -50,9 +50,20 @@ var initMap = function(){
             text: false
         });
         $("#closeButton").click(function(){
-            $("#hoverInfo").hide();
-            $("#hoverInfoPointer").hide();
-
+            hidePopup();
+        });
+        $("#hoverInfo").click(function(){
+            console.log($(this).data("attr"));
+        });
+        $(".speciesItem").each(function(){
+            if($(this).data("attributes") === event.graphic.attributes){
+                $(this).addClass("selectedItem");
+                $(this).children(".arrow").show();
+            }
+            else{
+                $(this).removeClass("selectedItem");
+                $(this).children(".arrow").hide();
+            }
         });
 	});
 
@@ -106,6 +117,7 @@ var addPoints = function(){
 
 		$("#speciesList").append("<div id='species" + attr.OBJECTID + "' class='speciesItem'>" + attr.COMMON_NAME + "</div>");
 		$("#species"+attr.OBJECTID).data("attributes",attr);
+        $("#species"+attr.OBJECTID).data("geo",pt);
         $("#species"+attr.OBJECTID).append("<span class='arrow'></span>");
 
         $(".speciesItem").click(function(){
@@ -113,6 +125,29 @@ var addPoints = function(){
             $(this).addClass("selectedItem");
             $(".arrow").hide();
             $(this).children(".arrow").show();
+
+            $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + $(this).data("attributes").COMMON_NAME + "</td><td id='arrowCon' rowspan='2'><button id='closeButton'></button><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/250px-Siberischer_tiger_de_edit02.jpg' alt='" + $(this).data("attributes").COMMON_NAME + "'</td></tr></table>").data("attr",$(this).data("attributes"));
+            positionHoverInfo($(this).data("geo"));
+            $("#closeButton").button({
+                icons: {
+                    primary: "ui-icon-close"
+                },
+                text: false
+            });
+            $("#closeButton").click(function(){
+                hidePopup();
+            });
+            $("#hoverInfo").click(function(){
+                console.log($(this).data("attr"));
+            });
+        });
+        $(".speciesItem").each(function(){
+            if($(this).data("attributes").rlcategory !== "VU"){
+                $(this).hide();
+            }
+            else{
+                $(this).show();
+            }
         });
 	});
 };
@@ -121,18 +156,23 @@ var sortGraphics = function(){
 	var arg;
 	if ($("#selectedText").html() === "LEAST<br>CONCERN"){
 		arg = "LC";
+        $("#speciesHeader").html("LEAST CONCERN SPECIES");
 	}
 	else if ($("#selectedText").html() === "NEAR<br>THREATENED"){
 		arg = "NT";
+        $("#speciesHeader").html("NEAR THREATENED SPECIES");
 	}
 	else if ($("#selectedText").html() === "VULNERABLE"){
 		arg = "VU";
+        $("#speciesHeader").html("VULNERABLE SPECIES");
 	}
 	else if ($("#selectedText").html() === "ENDANGERED"){
 		arg = "EN";
+        $("#speciesHeader").html("ENDANGERED SPECIES");
 	}
 	else{
 		arg = "CR";
+        $("#speciesHeader").html("CRITICALLY ENDANGERED SPECIES");
 	}
 	dojo.forEach(_points.graphics,function(g){
 		g.show();
@@ -140,6 +180,15 @@ var sortGraphics = function(){
 			g.hide();
 		}
 	});
+    $(".speciesItem").each(function(){
+        if($(this).data("attributes").rlcategory !== arg){
+            $(this).hide();
+        }
+        else{
+            $(this).show();
+        }
+    });
+    hidePopup();
 };
 
 var positionHoverInfo = function(grp){

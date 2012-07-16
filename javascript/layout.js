@@ -13,6 +13,7 @@ $(document).ready(function(e) {
 		axis : "x",
 		containment : "#selector",
 		drag : function(){
+            hidePopup();
 			if(checkSelection() === "LC"){
 				$("#selectedText").html("LEAST<br>CONCERN");
 			}
@@ -114,3 +115,10 @@ var checkSelection = function(){
 		return"CR"
 	}
 };
+
+var hidePopup = function(){
+    $("#hoverInfo").hide();
+    $("#hoverInfoPointer").hide();
+    $(".speciesItem").removeClass("selectedItem");
+    $(".arrow").hide();
+}
