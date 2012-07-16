@@ -40,18 +40,33 @@ var initMap = function(){
 
 	dojo.connect(_points,"onMouseOver",function(event){
 		_map.setCursor("pointer");
-		event.graphic.setSymbol(event.graphic.symbol.setHeight(30).setWidth(37).setOffset(9,14));
+		event.graphic.setSymbol(event.graphic.symbol.setHeight(30).setWidth(37).setOffset(10,14));
+        $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + event.graphic.attributes.COMMON_NAME + "</td><td id='arrowCon' rowspan='2'><button id='closeButton'></button><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/250px-Siberischer_tiger_de_edit02.jpg' alt='" + event.graphic.attributes.COMMON_NAME + "'</td></tr></table>");
+        positionHoverInfo(event.graphic.geometry);
+        $("#closeButton").button({
+            icons: {
+                primary: "ui-icon-close"
+            },
+            text: false
+        });
+        $("#closeButton").click(function(){
+            $("#hoverInfo").hide();
+            $("#hoverInfoPointer").hide();
+
+        });
 	});
 
-	dojo.connect(_points,"onMouseOut",function(){
+	dojo.connect(_points,"onMouseOut",function(event){
 		_map.setCursor("default");
 		event.graphic.setSymbol(event.graphic.symbol.setHeight(25).setWidth(31).setOffset(8,12));
 	});
 
 	dojo.connect(_points,"onClick",function(){
 		_map.setCursor("default");
-		alert(event.graphic.attributes.rlcategory);
 	});
+
+    dojo.connect(_map,"onPan",function(){
+    });
 };
 
 var addPoints = function(){
@@ -125,4 +140,13 @@ var sortGraphics = function(){
 			g.hide();
 		}
 	});
+};
+
+var positionHoverInfo = function(grp){
+    var popupHeight = $("#arrowCon").height();
+
+    $("#hoverInfo").css("left",_map.toScreen(grp).x - 13).css("top",_map.toScreen(grp).y + 17)
+    $("#hoverInfoPointer").css("left",_map.toScreen(grp).x-13).css("top",_map.toScreen(grp).y + 2)
+    $("#hoverInfo").show();
+    $("#hoverInfoPointer").show();
 };

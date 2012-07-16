@@ -26,11 +26,11 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script type="text/javascript" src="javascript/jquery.ui.core.min.js"></script>
         <script type="text/javascript" src="javascript/jquery.ui.widget.min.js"></script>
+        <script type="text/javascript" src="javascript/jquery.ui.button.min.js"></script>
         <script type="text/javascript" src="javascript/jquery.ui.mouse.min.js"></script>
         <script type="text/javascript" src="javascript/jquery.ui.draggable.min.js"></script>
         <script type="text/javascript" src="javascript/jquery.ui.touch-punch.min.js"></script>
         <script type="text/javascript" src="javascript/jquery.colorbox-min.js"></script>
-        <script type="text/javascript" src="javascript/multiTips.js"></script>
         <script type="text/javascript" src="javascript/JSONdata.js"></script>
         <script type="text/javascript" src="javascript/maps.js"></script>
         <script type="text/javascript" src="javascript/layout.js"></script>
@@ -99,7 +99,10 @@
                 </div><!--sidePanel-->
                 <div id="mapPanel" dojotype="dijit.layout.BorderContainer" gutters="false" region="center">
                 	<div id="shadowDiv"></div>
-                    <div id="map" dojotype="dijit.layout.ContentPane" region="center"></div>
+                    <div id="map" dojotype="dijit.layout.ContentPane" region="center">
+                        <div id="hoverInfo"></div>
+                        <div id="hoverInfoPointer"></div>
+                    </div><!--/map-->
                     <div id="selectorCon" dojotype="dijit.layout.ContentPane" region="bottom">
                     	<table id="selector">
                         	<tr>
