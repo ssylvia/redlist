@@ -112,7 +112,7 @@ var checkSelection = function(){
 		return "EN";
 	}
 	else{
-		return"CR"
+		return"CR";
 	}
 };
 
@@ -121,4 +121,85 @@ var hidePopup = function(){
     $("#hoverInfoPointer").hide();
     $(".speciesItem").removeClass("selectedItem");
     $(".arrow").hide();
-}
+};
+
+var getOppositeOrder = function(order){
+    if (order == "Odd"){
+        return "Even";
+    }
+    else{
+        return "Odd";
+    }
+};
+
+var openPopout = function(attr){
+    $("body").append("<div id='modalBackground'></div>");
+    $("body").append("<div id='speciesPanel'></div>");
+    $("#modalBackground").fadeTo("slow","0.7");
+    $("#speciesPanel").fadeIn();
+    $("#speciesPanel").append("<div id='speciesContent' class='speciesContent'></div>");
+    $("#speciesPanel").append("<div id='speciesMap' class='speciesContent'></div>");
+    $(".speciesContent").css("height",$("#speciesPanel").height());
+    $("#speciesMap").css("width",$("#speciesPanel").width() - 400);
+
+    initSpeciesMap(attr);
+
+    $("#modalBackground").click(function(){
+        $("#modalBackground").fadeOut("fast");
+        $("#speciesPanel").fadeOut("fast");
+        setTimeout(function(){
+            $("#modalBackground").remove();
+            $("#speciesPanel").remove();
+        },200);
+
+    });
+};
+
+var initSpeciesMap = function(attr){
+    var order;
+    if ($("#speciesMapOdd").length > 0){
+        order = "Even";
+    }
+    else{
+        order = "Odd";
+
+    }
+
+    $("#speciesMap").append("<div id='speciesMap"+order+"' class='map'></div>");
+    $("#speciesMap"+order).css("z-index","0");
+
+    var initExtent = new esri.geometry.Extent({"xmin":-15440190.518952178,"ymin":-4384014.805557845,"xmax":16259773.85146766,"ymax":10174487.34974608,"spatialReference":{"wkid":102100}});
+
+    var map = new esri.Map("speciesMap"+order,{
+        extent:initExtent,
+        wrapAround180:true
+    });
+
+    var basemap= new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer");
+    map.addLayer(basemap);
+
+    var outlineLayer = new esri.layers.FeatureLayer("http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/RedList_AllRanges/FeatureServer/0",{
+        mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
+        outFields: ["*"]
+    });
+    outlineLayer.setDefinitionExpression("TaxonID='"+attr.TaxonID+"'");
+    map.addLayer(outlineLayer);
+
+    var fillLayer = new esri.layers.FeatureLayer("http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/RedList_AllRanges/FeatureServer/1",{
+        mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
+        outFields: ["*"]
+    });
+    fillLayer.setDefinitionExpression("TaxonID='"+attr.TaxonID+"'");
+    map.addLayer(fillLayer);
+
+    map.firstLoad = false;
+
+    dojo.connect(map,"onUpdateEnd",function(){
+        if (map.firstLoad === false && map.getLayer(map.graphicsLayerIds[0]).graphics[0] !== undefined){
+            map.firstLoad = true;
+            map.setExtent(map.getLayer(map.graphicsLayerIds[0]).graphics[0]._extent.expand(1.8));
+        }
+
+    });
+
+};

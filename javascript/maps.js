@@ -5,6 +5,7 @@ dojo.require("esri.IdentityManager");
 dojo.require("dijit.dijit");
 dojo.require("dijit.layout.BorderContainer");
 dojo.require("dijit.layout.ContentPane");
+dojo.require("esri.layers.FeatureLayer");
 
 var _map,
 	_points,
@@ -28,7 +29,7 @@ var initMap = function(){
 	addPoints();
 
 	dojo.forEach(_points.graphics,function(g){
-		if(g.attributes.rlcategory !== "VU"){
+		if(g.attributes.RLcategory !== "VU"){
 			g.hide();
 		}
 	});
@@ -40,21 +41,10 @@ var initMap = function(){
 
 	dojo.connect(_points,"onMouseOver",function(event){
 		_map.setCursor("pointer");
+        $("#closeButton").remove();
 		event.graphic.setSymbol(event.graphic.symbol.setHeight(30).setWidth(37).setOffset(10,14));
-        $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + event.graphic.attributes.COMMON_NAME + "</td><td id='arrowCon' rowspan='2'><button id='closeButton'></button><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/250px-Siberischer_tiger_de_edit02.jpg' alt='" + event.graphic.attributes.COMMON_NAME + "'</td></tr></table>").data("attr",event.graphic.attributes);
+        $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + event.graphic.attributes.Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/250px-Siberischer_tiger_de_edit02.jpg' alt='" + event.graphic.attributes.Common_name + "'</td></tr></table>").data("attr",event.graphic.attributes);
         positionHoverInfo(event.graphic.geometry);
-        $("#closeButton").button({
-            icons: {
-                primary: "ui-icon-close"
-            },
-            text: false
-        });
-        $("#closeButton").click(function(){
-            hidePopup();
-        });
-        $("#hoverInfo").click(function(){
-            console.log($(this).data("attr"));
-        });
         $(".speciesItem").each(function(){
             if($(this).data("attributes") === event.graphic.attributes){
                 $(this).addClass("selectedItem");
@@ -70,10 +60,11 @@ var initMap = function(){
 	dojo.connect(_points,"onMouseOut",function(event){
 		_map.setCursor("default");
 		event.graphic.setSymbol(event.graphic.symbol.setHeight(25).setWidth(31).setOffset(8,12));
+        hidePopup();
 	});
 
 	dojo.connect(_points,"onClick",function(){
-		_map.setCursor("default");
+        openPopout(event.graphic.attributes);
 	});
 
     dojo.connect(_map,"onPan",function(){
@@ -87,25 +78,25 @@ var addPoints = function(){
 		var attr = ftr.attributes;
 
 		var sym;
-		if(attr.class === "MAMMALIA"){
+		if(attr.Class === "MAMMALIA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Mammal_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.class === "REPTILIA"){
+		else if(attr.Class === "REPTILIA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Reptile_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.class === "INSECTA"){
+		else if(attr.Class === "INSECTA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Insect_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.class === "CRUSTACEA"){
+		else if(attr.Class === "CRUSTACEA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Crustacean_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.class === "GASTROPODA"){
+		else if(attr.Class === "GASTROPODA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Gastropod_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.class === "AMPHIBIA"){
+		else if(attr.Class === "AMPHIBIA"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Amphibian_icon.png', 31, 25).setOffset(8,12);
 		}
-		else if(attr.kingdom === "PLANTAE"){
+		else if(attr.Kingdom === "PLANTAE"){
 			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Plant_icon.png', 31, 25).setOffset(8,12);
 		}
 		else{
@@ -115,41 +106,37 @@ var addPoints = function(){
 
 		_points.add(new esri.Graphic(pt,sym,attr));
 
-		$("#speciesList").append("<div id='species" + attr.OBJECTID + "' class='speciesItem'>" + attr.COMMON_NAME + "</div>");
+		$("#speciesList").append("<div id='species" + attr.OBJECTID + "' class='speciesItem'>" + attr.Common_name + "</div>");
 		$("#species"+attr.OBJECTID).data("attributes",attr);
         $("#species"+attr.OBJECTID).data("geo",pt);
         $("#species"+attr.OBJECTID).append("<span class='arrow'></span>");
-
-        $(".speciesItem").click(function(){
-            $(".speciesItem").removeClass("selectedItem");
-            $(this).addClass("selectedItem");
-            $(".arrow").hide();
-            $(this).children(".arrow").show();
-
-            $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + $(this).data("attributes").COMMON_NAME + "</td><td id='arrowCon' rowspan='2'><button id='closeButton'></button><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/250px-Siberischer_tiger_de_edit02.jpg' alt='" + $(this).data("attributes").COMMON_NAME + "'</td></tr></table>").data("attr",$(this).data("attributes"));
-            positionHoverInfo($(this).data("geo"));
-            $("#closeButton").button({
-                icons: {
-                    primary: "ui-icon-close"
-                },
-                text: false
-            });
-            $("#closeButton").click(function(){
-                hidePopup();
-            });
-            $("#hoverInfo").click(function(){
-                console.log($(this).data("attr"));
-            });
-        });
-        $(".speciesItem").each(function(){
-            if($(this).data("attributes").rlcategory !== "VU"){
-                $(this).hide();
-            }
-            else{
-                $(this).show();
-            }
-        });
 	});
+
+    $(".speciesItem").mouseover(function(){
+        $(".speciesItem").removeClass("selectedItem");
+        $(this).addClass("selectedItem");
+        $(".arrow").hide();
+        $(this).children(".arrow").show();
+        $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + $(this).data("attributes").Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/250px-Siberischer_tiger_de_edit02.jpg' alt='" + $(this).data("attributes").Common_name + "'</td></tr></table>").data("attr",$(this).data("attributes"));
+        positionHoverInfo($(this).data("geo"));
+    });
+
+    $("#speciesList").mouseleave(function(){
+        hidePopup();
+    });
+
+    $(".speciesItem").click(function(){
+        openPopout($(this).data("attributes"));
+    });
+
+    $(".speciesItem").each(function(){
+        if($(this).data("attributes").RLcategory !== "VU"){
+            $(this).hide();
+        }
+        else{
+            $(this).show();
+        }
+    });
 };
 
 var sortGraphics = function(){
@@ -176,12 +163,12 @@ var sortGraphics = function(){
 	}
 	dojo.forEach(_points.graphics,function(g){
 		g.show();
-		if(g.attributes.rlcategory !== arg){
+		if(g.attributes.RLcategory !== arg){
 			g.hide();
 		}
 	});
     $(".speciesItem").each(function(){
-        if($(this).data("attributes").rlcategory !== arg){
+        if($(this).data("attributes").RLcategory !== arg){
             $(this).hide();
         }
         else{

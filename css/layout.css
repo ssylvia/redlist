@@ -267,3 +267,39 @@ a{
 	-ms-filter: "progid: DXImageTransform.Microsoft.Shadow(strength = 5, Direction = 90, Color = '#666')";
 	z-index:20;
 }
+
+#modalBackground{
+    display:none;
+    position:absolute;
+    background-color:#000;
+    height:100%;
+    width:100%;
+    top:0;
+    z-index:1000;
+}
+
+#speciesPanel{
+    display:none;
+    position:absolute;
+    background-color:#fff;
+    top:10%;
+    left:10%;
+    height:80%;
+    width:80%;
+    padding:15px;
+    z-index:1001;
+}
+
+#speciesContent{
+    width:400px;
+    float:left;
+}
+
+#speciesMap{
+    float:right;
+}
+
+.map{
+    height:100%;
+    width:100%;
+}
