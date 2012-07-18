@@ -297,6 +297,10 @@ a{
     float:left;
 }
 
+.speciesImg{
+    width:400px;
+}
+
 #speciesMap{
     float:right;
 }
@@ -304,4 +308,8 @@ a{
 .map{
     height:100%;
     width:100%;
+}
+
+.preloadImg{
+    display:none;
 }

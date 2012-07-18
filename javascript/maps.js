@@ -106,7 +106,7 @@ var addPoints = function(){
 
 		_points.add(new esri.Graphic(pt,sym,attr));
 
-        $("body").append("<img id='img"+attr.OBJECTID+"' src='images/thumbs/"+attr.Thumb_URL+"' alt=''>");
+        $("body").append("<img id='img"+attr.OBJECTID+"' class='preloadImg' src='images/thumbs/"+attr.Thumb_URL+"' alt=''>");
         $("#img"+attr.OBJECTID).load(function(){
             $("#img"+attr.OBJECTID).remove();
         });

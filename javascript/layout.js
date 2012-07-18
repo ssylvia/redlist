@@ -141,6 +141,7 @@ var openPopout = function(attr){
     $("#speciesPanel").append("<div id='speciesMap' class='speciesContent'></div>");
     $(".speciesContent").css("height",$("#speciesPanel").height());
     $("#speciesMap").css("width",$("#speciesPanel").width() - 400);
+    $("#speciesContent").append("<img class='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''>");
 
     initSpeciesMap(attr);
 
@@ -170,12 +171,25 @@ var initSpeciesMap = function(attr){
 
     var initExtent = new esri.geometry.Extent({"xmin":-15440190.518952178,"ymin":-4384014.805557845,"xmax":16259773.85146766,"ymax":10174487.34974608,"spatialReference":{"wkid":102100}});
 
+    var lods = [
+  		{"level" : 0, "resolution" : 39135.7584820001, "scale" : 147914381.897889},
+        {"level" : 1, "resolution" : 19567.8792409999, "scale" : 73957190.948944},
+      	{"level" : 2, "resolution" : 9783.93962049996, "scale" : 36978595.474472},
+  		{"level" : 3, "resolution" : 4891.96981024998, "scale" : 18489297.737236},
+        {"level" : 4, "resolution" : 2445.98490512499, "scale" : 9244648.868618},
+        {"level" : 5, "resolution" : 1222.99245256249, "scale" : 4622324.434309},
+  		{"level" : 6, "resolution" : 611.49622628138, "scale" : 2311162.217155},
+        {"level" : 7, "resolution" : 305.748113140558, "scale" : 1155581.108577},
+        {"level" : 8, "resolution" : 152.874056570411, "scale" : 577790.554289}
+	];
+
     var map = new esri.Map("speciesMap"+order,{
         extent:initExtent,
-        wrapAround180:true
+        wrapAround180:true,
+        lods:lods
     });
 
-    var basemap= new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer");
+    var basemap= new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer");
     map.addLayer(basemap);
 
     var outlineLayer = new esri.layers.FeatureLayer("http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/RedList_AllRanges/FeatureServer/0",{
