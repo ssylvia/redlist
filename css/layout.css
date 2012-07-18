@@ -1,6 +1,6 @@
 html,body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,fieldset,input,hr {margin:0; padding:0;}
 html,body{height:100%;width:100%;overflow:hidden; font-family:Georgia, "Times New Roman", Times, serif; color:#444;}
-h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,em,th {font-weight:normal; font-style:normal; font-family:Arial, Helvetica, sans-serif; color:#fff;}
+h1,h2,h3,h4,h5,h6,pre,code,address,caption,cite,code,th {font-weight:normal; font-style:normal; font-family:Arial, Helvetica, sans-serif; color:#fff;}
 ul,ol {list-style:none;}
 fieldset,img,hr {border:none; outline:none;}
 caption,th {text-align:left;}
@@ -289,6 +289,7 @@ a{
     height:80%;
     width:80%;
     padding:15px;
+    font-size:14px;
     z-index:1001;
 }
 
@@ -297,12 +298,65 @@ a{
     float:left;
 }
 
-.speciesImg{
+#speciesImg{
     width:400px;
+}
+
+#commonName{
+    position:absolute;
+    background-color:#fff;
+    width:300px;
+    padding:5px;
+    color:#f00;
+    font-weight:bold;
+    font-size:16px;
+    font-family:Arial, Helvetica, sans-serif;
+    margin:-33px 0 0 25px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
 }
 
 #speciesMap{
     float:right;
+}
+
+.listingText{
+    margin-left:30px;
+    width:300px;
+    border-top:1px solid #d81e05;
+    padding:2px 0 2px 0;
+}
+
+.lsText{
+    color:#848484;
+}
+
+#sciName{
+    margin-top:15px;
+}
+
+#statusText{
+    border-bottom:1px solid #d81e05;
+}
+
+#speciesDescription{
+    position:absolute;
+    padding:0 10px 0 30px;
+    width:355px;
+    overflow:auto;
+}
+
+#moreInfo{
+    position:absolute;
+    color:#d81e05;
+    left:45px;
+    font-size:12px;
+    text-decoration:none;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+#moreInfo:hover{
+    text-decoration:underline;
 }
 
 .map{

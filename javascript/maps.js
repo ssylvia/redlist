@@ -63,11 +63,11 @@ var initMap = function(){
         hidePopup();
 	});
 
-	dojo.connect(_points,"onClick",function(){
+	dojo.connect(_points,"onClick",function(event){
         openPopout(event.graphic.attributes);
 	});
 
-    dojo.connect(_map,"onPan",function(){
+    dojo.connect(_map,"onPan",function(event){
     });
 };
 

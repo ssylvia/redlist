@@ -141,7 +141,16 @@ var openPopout = function(attr){
     $("#speciesPanel").append("<div id='speciesMap' class='speciesContent'></div>");
     $(".speciesContent").css("height",$("#speciesPanel").height());
     $("#speciesMap").css("width",$("#speciesPanel").width() - 400);
-    $("#speciesContent").append("<img class='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''>");
+    $("#speciesContent").append("<a href='"+attr.ArkiveURL+"' target='_blank'><img id='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''></a>");
+    $("#speciesImg").load(function(){
+        $("#speciesContent").append("<div id='commonName'>"+attr.Common_name+"</div>");
+        $("#speciesContent").append("<div id='sciName' class='listingText'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>").append("<div id='statusText' class='listingText'><span class='lsText'>STATUS: </span>"+attr.RLdescrpt+"</div>");
+        $("#speciesPanel").append("<div id='speciesDescription'>"+attr.Description+"</div>");
+        $("#speciesDescription").css("top",$("#speciesImg").height() + $("#sciName").height() + $("#statusText").height() + 65).css("height",$("#speciesContent").height() - $("#speciesImg").height() - $("#sciName").height() - $("#statusText").height() - 80);
+        $("#speciesPanel").append("<a id='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></div>");
+        $("#moreInfo").css("top",$("#speciesContent").height());
+    });
+
 
     initSpeciesMap(attr);
 
@@ -178,15 +187,15 @@ var initSpeciesMap = function(attr){
   		{"level" : 3, "resolution" : 4891.96981024998, "scale" : 18489297.737236},
         {"level" : 4, "resolution" : 2445.98490512499, "scale" : 9244648.868618},
         {"level" : 5, "resolution" : 1222.99245256249, "scale" : 4622324.434309},
-  		{"level" : 6, "resolution" : 611.49622628138, "scale" : 2311162.217155},
-        {"level" : 7, "resolution" : 305.748113140558, "scale" : 1155581.108577},
-        {"level" : 8, "resolution" : 152.874056570411, "scale" : 577790.554289}
+  		{"level" : 6, "resolution" : 611.49622628138, "scale" : 2311162.217155}
+        //{"level" : 7, "resolution" : 305.748113140558, "scale" : 1155581.108577},
+        //{"level" : 8, "resolution" : 152.874056570411, "scale" : 577790.554289}
 	];
 
     var map = new esri.Map("speciesMap"+order,{
         extent:initExtent,
         wrapAround180:true,
-        lods:lods
+        lods:lods,
     });
 
     var basemap= new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer");
