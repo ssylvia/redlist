@@ -17,7 +17,7 @@ var initMap = function(){
 
 	_map = new esri.Map("map",{
 		extent:initExtent,
-		wrapAround180:true
+		wrapAround180:false
 	});
 
 	var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer");
@@ -105,7 +105,7 @@ var addPoints = function(){
 
 
 		_points.add(new esri.Graphic(pt,sym,attr));
-
+\
         $("body").append("<img id='img"+attr.OBJECTID+"' src='images/thumbs/"+attr.Thumb_URL+"' alt=''>");
         $("#img"+attr.OBJECTID).load(function(){
             $("#img"+attr.OBJECTID).remove();
