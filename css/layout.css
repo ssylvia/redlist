@@ -92,8 +92,9 @@ a{
 
 #topPanel{
 	width:100%;
-	height:260px;
+	height:400px;
 	padding:25px 25px 0 25px;
+    font-size:15px;
 }
 
 #speciesList{
@@ -170,7 +171,8 @@ a{
 }
 
 #speciesThmb{
-    height:80px;
+    height:70px;
+    width:93px;
 }
 
 #closeButton{

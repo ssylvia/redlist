@@ -106,6 +106,11 @@ var addPoints = function(){
 
 		_points.add(new esri.Graphic(pt,sym,attr));
 
+        $("body").append("<img id='img"+attr.OBJECTID+"' src='images/thumbs/"+attr.Thumb_URL+"' alt=''>");
+        $("#img"+attr.OBJECTID).load(function(){
+            $("#img"+attr.OBJECTID).remove();
+        });
+
 		$("#speciesList").append("<div id='species" + attr.OBJECTID + "' class='speciesItem'>" + attr.Common_name + "</div>");
 		$("#species"+attr.OBJECTID).data("attributes",attr);
         $("#species"+attr.OBJECTID).data("geo",pt);
