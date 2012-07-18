@@ -175,7 +175,7 @@ var initSpeciesMap = function(attr){
         wrapAround180:true
     });
 
-    var basemap= new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer");
+    var basemap= new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer");
     map.addLayer(basemap);
 
     var outlineLayer = new esri.layers.FeatureLayer("http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/RedList_AllRanges/FeatureServer/0",{
