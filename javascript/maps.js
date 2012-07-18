@@ -43,7 +43,7 @@ var initMap = function(){
 		_map.setCursor("pointer");
         $("#closeButton").remove();
 		event.graphic.setSymbol(event.graphic.symbol.setHeight(30).setWidth(37).setOffset(10,14));
-        $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + event.graphic.attributes.Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/250px-Siberischer_tiger_de_edit02.jpg' alt='" + event.graphic.attributes.Common_name + "'</td></tr></table>").data("attr",event.graphic.attributes);
+        $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + event.graphic.attributes.Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='images/thumbs/" + event.graphic.attributes.Thumb_URL + "' alt='" + event.graphic.attributes.Common_name + "'</td></tr></table>").data("attr",event.graphic.attributes);
         positionHoverInfo(event.graphic.geometry);
         $(".speciesItem").each(function(){
             if($(this).data("attributes") === event.graphic.attributes){
@@ -117,7 +117,7 @@ var addPoints = function(){
         $(this).addClass("selectedItem");
         $(".arrow").hide();
         $(this).children(".arrow").show();
-        $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + $(this).data("attributes").Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Siberischer_tiger_de_edit02.jpg/250px-Siberischer_tiger_de_edit02.jpg' alt='" + $(this).data("attributes").Common_name + "'</td></tr></table>").data("attr",$(this).data("attributes"));
+        $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + $(this).data("attributes").Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='images/thumbs/" + $(this).data("attributes").Thumb_URL + "' alt='" + $(this).data("attributes").Common_name + "'</td></tr></table>").data("attr",$(this).data("attributes"));
         positionHoverInfo($(this).data("geo"));
     });
 
