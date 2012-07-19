@@ -12,7 +12,8 @@ var _map,
 	_selPos,
     _speciesMap,
     _outlineLayer,
-    _fillLayer;
+    _fillLayer,
+    _currentSpecies = [];
 
 var initMap = function(){
 
@@ -31,10 +32,14 @@ var initMap = function(){
 
 	addPoints();
 
+    _currentSpecies = [];
 	dojo.forEach(_points.graphics,function(g){
 		if(g.attributes.RLcategory !== "VU"){
 			g.hide();
 		}
+        else{
+            _currentSpecies.push(g.attributes)
+        }
 	});
 
 	dojo.connect(_map, 'onLoad', function(theMap) {
@@ -169,11 +174,15 @@ var sortGraphics = function(){
 		arg = "CR";
         $("#speciesHeader").html("CRITICALLY ENDANGERED SPECIES");
 	}
+    _currentSpecies = [];
 	dojo.forEach(_points.graphics,function(g){
 		g.show();
 		if(g.attributes.RLcategory !== arg){
 			g.hide();
 		}
+        else{
+            _currentSpecies.push(g.attributes);
+        }
 	});
     $(".speciesItem").each(function(){
         if($(this).data("attributes").RLcategory !== arg){

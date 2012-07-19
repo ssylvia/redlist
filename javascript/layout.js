@@ -216,6 +216,7 @@ var openPopout = function(attr,newPopout){
                     $("#prevArrow"+order).remove();
                     $("#moreInfo"+order).remove();
                 }, 200);
+                prevSpecies(attr);
             });
         },delay);
     });
@@ -300,22 +301,38 @@ var initSpeciesMap = function(attr){
 };
 
 var nextSpecies = function(attr){
-    var newAttr;
-    var index = attr.OBJECTID;
-    for (i=0; i < _points.graphics.length; i++){
-        if(newAttr === undefined){
-            if(index === _points.graphics.length - 1){
-                index = 0;
+    for(i=0;i<_currentSpecies.length;i++){
+        if(_currentSpecies[i].TaxonID === attr.TaxonID){
+            if (i === _currentSpecies.length - 1){
+                _speciesMap.firstLoad = false;
+                _outlineLayer.setDefinitionExpression("TaxonID='"+_currentSpecies[0].TaxonID+"'");
+                _fillLayer.setDefinitionExpression("TaxonID='"+_currentSpecies[0].TaxonID+"'");
+                openPopout(_currentSpecies[0],false);
             }
             else{
-                index++;
-            }
-            if (_points.graphics[index].attributes.RLcategory === attr.RLcategory){
-                newAttr = _points.graphics[index].attributes;
                 _speciesMap.firstLoad = false;
-                _outlineLayer.setDefinitionExpression("TaxonID='"+newAttr.TaxonID+"'");
-                _fillLayer.setDefinitionExpression("TaxonID='"+newAttr.TaxonID+"'");
-                openPopout(newAttr,false);
+                _outlineLayer.setDefinitionExpression("TaxonID='"+_currentSpecies[i+1].TaxonID+"'");
+                _fillLayer.setDefinitionExpression("TaxonID='"+_currentSpecies[i+1].TaxonID+"'");
+                openPopout(_currentSpecies[i+1],false);
+            }
+        }
+    }
+};
+
+var prevSpecies = function(attr){
+    for(i=0;i<_currentSpecies.length;i++){
+        if(_currentSpecies[i].TaxonID === attr.TaxonID){
+            if (i === 0){
+                _speciesMap.firstLoad = false;
+                _outlineLayer.setDefinitionExpression("TaxonID='"+_currentSpecies[_currentSpecies.length - 1].TaxonID+"'");
+                _fillLayer.setDefinitionExpression("TaxonID='"+_currentSpecies[_currentSpecies.length - 1].TaxonID+"'");
+                openPopout(_currentSpecies[_currentSpecies.length - 1],false);
+            }
+            else{
+                _speciesMap.firstLoad = false;
+                _outlineLayer.setDefinitionExpression("TaxonID='"+_currentSpecies[i-1].TaxonID+"'");
+                _fillLayer.setDefinitionExpression("TaxonID='"+_currentSpecies[i-1].TaxonID+"'");
+                openPopout(_currentSpecies[i-1],false);
             }
         }
     }
