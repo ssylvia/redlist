@@ -132,13 +132,15 @@ var getOppositeOrder = function(order){
     }
 };
 
-var openPopout = function(attr){
-    $("body").append("<div id='modalBackground'></div>");
-    $("body").append("<div id='speciesPanel'></div>");
-    $("#modalBackground").fadeTo("slow","0.7");
-    $("#speciesPanel").fadeIn();
+var openPopout = function(attr,newPopout){
+    if(newPopout === true){
+        $("body").append("<div id='modalBackground'></div>");
+        $("body").append("<div id='speciesPanel'></div>");
+        $("#modalBackground").fadeTo("slow","0.7");
+        $("#speciesPanel").fadeIn();
+        $("#speciesPanel").append("<div id='speciesMap' class='speciesContent'></div>");
+    }
     $("#speciesPanel").append("<div id='speciesContent' class='speciesContent'></div>");
-    $("#speciesPanel").append("<div id='speciesMap' class='speciesContent'></div>");
     $(".speciesContent").css("height",$("#speciesPanel").height());
     $("#speciesMap").css("width",$("#speciesPanel").width() - 400);
     $("#speciesContent").append("<a href='"+attr.ArkiveURL+"' target='_blank'><img id='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''></a>");
@@ -192,33 +194,33 @@ var initSpeciesMap = function(attr){
         //{"level" : 8, "resolution" : 152.874056570411, "scale" : 577790.554289}
 	];
 
-    var map = new esri.Map("speciesMap"+order,{
+    _speciesMap = new esri.Map("speciesMap"+order,{
         extent:initExtent,
         wrapAround180:true,
         lods:lods,
     });
 
     var basemap= new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer");
-    map.addLayer(basemap);
+    _speciesMap.addLayer(basemap);
 
     var outlineLayer = new esri.layers.FeatureLayer("http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/RedList_AllRanges/FeatureServer/0",{
         mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
         outFields: ["*"]
     });
     outlineLayer.setDefinitionExpression("TaxonID='"+attr.TaxonID+"'");
-    map.addLayer(outlineLayer);
+    _speciesMap.addLayer(outlineLayer);
 
     var fillLayer = new esri.layers.FeatureLayer("http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/RedList_AllRanges/FeatureServer/1",{
         mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
         outFields: ["*"]
     });
     fillLayer.setDefinitionExpression("TaxonID='"+attr.TaxonID+"'");
-    map.addLayer(fillLayer);
+    _speciesMap.addLayer(fillLayer);
 
-    map.firstLoad = false;
+    _speciesMap.firstLoad = false;
 
-    dojo.connect(map,"onUpdateEnd",function(){
-        if (map.firstLoad === false && map.getLayer(map.graphicsLayerIds[0]).graphics[0] !== undefined){
+    dojo.connect(_speciesMap,"onUpdateEnd",function(){
+        if (_speciesMap){
             map.firstLoad = true;
             map.setExtent(map.getLayer(map.graphicsLayerIds[0]).graphics[0]._extent.expand(1.8));
         }

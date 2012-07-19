@@ -9,7 +9,10 @@ dojo.require("esri.layers.FeatureLayer");
 
 var _map,
 	_points,
-	_selPos;
+	_selPos,
+    _speciesMap,
+    _outlineLayer,
+    _fillLayer;
 
 var initMap = function(){
 
@@ -64,7 +67,7 @@ var initMap = function(){
 	});
 
 	dojo.connect(_points,"onClick",function(event){
-        openPopout(event.graphic.attributes);
+        openPopout(event.graphic.attributes,true);
 	});
 
     dojo.connect(_map,"onPan",function(event){
@@ -131,7 +134,7 @@ var addPoints = function(){
     });
 
     $(".speciesItem").click(function(){
-        openPopout($(this).data("attributes"));
+        openPopout($(this).data("attributes"),true);
     });
 
     $(".speciesItem").each(function(){
