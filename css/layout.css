@@ -298,11 +298,11 @@ a{
     float:left;
 }
 
-#speciesImg{
+.speciesImg{
     width:400px;
 }
 
-#commonName{
+.commonName{
     position:absolute;
     background-color:#fff;
     width:300px;
@@ -331,22 +331,22 @@ a{
     color:#848484;
 }
 
-#sciName{
+.sciName{
     margin-top:15px;
 }
 
-#statusText{
+.statusText{
     border-bottom:1px solid #d81e05;
 }
 
-#speciesDescription{
+.speciesDescription{
     position:absolute;
     padding:0 10px 0 30px;
     width:355px;
     overflow:auto;
 }
 
-#moreInfo{
+.moreInfo{
     position:absolute;
     color:#d81e05;
     left:45px;
@@ -355,8 +355,30 @@ a{
     font-family:Arial, Helvetica, sans-serif;
 }
 
-#moreInfo:hover{
+.moreInfo:hover{
     text-decoration:underline;
+}
+
+.nextArrow{
+    display:none;
+    position:absolute;
+    width: 0;
+    height: 0;
+	border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent;
+	border-left: 15px solid #d81e05;
+    cursor:pointer;
+}
+
+.prevArrow{
+    display:none;
+    position:absolute;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent;
+	border-right: 15px solid #d81e05;
+    cursor:pointer;
 }
 
 .map{

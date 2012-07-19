@@ -139,18 +139,30 @@ var openPopout = function(attr,newPopout){
         $("#modalBackground").fadeTo("slow","0.7");
         $("#speciesPanel").fadeIn();
         $("#speciesPanel").append("<div id='speciesMap' class='speciesContent'></div>");
+        $("#speciesPanel").append("<div id='speciesContent' class='speciesContent'></div>");
+        $(".speciesContent").css("height",$("#speciesPanel").height());
+        $("#speciesMap").css("width",$("#speciesPanel").width() - 400);
     }
-    $("#speciesPanel").append("<div id='speciesContent' class='speciesContent'></div>");
-    $(".speciesContent").css("height",$("#speciesPanel").height());
-    $("#speciesMap").css("width",$("#speciesPanel").width() - 400);
-    $("#speciesContent").append("<a href='"+attr.ArkiveURL+"' target='_blank'><img id='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''></a>");
-    $("#speciesImg").load(function(){
-        $("#speciesContent").append("<div id='commonName'>"+attr.Common_name+"</div>");
-        $("#speciesContent").append("<div id='sciName' class='listingText'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>").append("<div id='statusText' class='listingText'><span class='lsText'>STATUS: </span>"+attr.RLdescrpt+"</div>");
-        $("#speciesPanel").append("<div id='speciesDescription'>"+attr.Description+"</div>");
-        $("#speciesDescription").css("top",$("#speciesImg").height() + $("#sciName").height() + $("#statusText").height() + 65).css("height",$("#speciesContent").height() - $("#speciesImg").height() - $("#sciName").height() - $("#statusText").height() - 80);
-        $("#speciesPanel").append("<a id='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></div>");
-        $("#moreInfo").css("top",$("#speciesContent").height());
+    var order;
+    if ($("#imgLinkOdd").length > 0){
+        order = "Even";
+    }
+    else{
+        order = "Odd";
+
+    }
+    $("#speciesContent").append("<a id='imgLink"+order+"' href='"+attr.ArkiveURL+"' target='_blank'><img id='speciesImg"+order+"' class='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''></a>");
+    $("#speciesImg"+order).load(function(){
+        $("#speciesContent").append("<div id='commonName"+order+"' class='commonName'>"+attr.Common_name+"</div>");
+        $("#speciesContent").append("<div id='sciName"+order+"' class='listingText sciName'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>").append("<div id='statusText"+order+"' class='listingText statusText'><span class='lsText'>STATUS: </span>"+attr.RLdescrpt+"</div>");
+        $("#speciesPanel").append("<div id='speciesDescription"+order+"' class='speciesDescription'>"+attr.Description+"</div>");
+        $("#speciesDescription"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + $("#statusText"+order).height() + 65).css("height",$("#speciesContent").height() - $("#speciesImg"+order).height() - $("#sciName"+order).height() - $("#statusText"+order).height() - 80);
+        $("#speciesPanel").append("<a id='moreInfo"+order+"' class='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></a><div id='nextArrow"+order+"' class='nextArrow'></div><div id='prevArrow"+order+"' class='prevArrow'></div>");
+        $("#moreInfo"+order).css("top",$("#speciesContent").height());
+        $("#nextArrow"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + 25).css("left",$("#sciName"+order).width() + 60).show().click(function(){
+        });
+        $("#prevArrow"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + 25).show().click(function(){
+        });
     });
 
 
@@ -221,8 +233,8 @@ var initSpeciesMap = function(attr){
 
     dojo.connect(_speciesMap,"onUpdateEnd",function(){
         if (_speciesMap){
-            map.firstLoad = true;
-            map.setExtent(map.getLayer(map.graphicsLayerIds[0]).graphics[0]._extent.expand(1.8));
+            _speciesMap.firstLoad = true;
+            _speciesMap.setExtent(_speciesMap.getLayer(_speciesMap.graphicsLayerIds[0]).graphics[0]._extent.expand(1.8));
         }
 
     });
