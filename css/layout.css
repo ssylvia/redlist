@@ -177,7 +177,9 @@ a{
 
 #closeButton{
     position:absolute;
-    top:2px;
+    font-size:12px;
+    padding:0 8px 0 8px;
+    top:4px;
     right:3px;
 }
 

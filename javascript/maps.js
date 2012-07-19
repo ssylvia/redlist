@@ -16,12 +16,22 @@ var _map,
     _currentSpecies = [];
 
 var initMap = function(){
+    
+    var lods = [
+      	{"level" : 0, "resolution" : 39135.7584820001, "scale" : 147914381.897889},
+        {"level" : 1, "resolution" : 19567.8792409999, "scale" : 73957190.948944},
+      	{"level" : 2, "resolution" : 9783.93962049996, "scale" : 36978595.474472},
+  		{"level" : 3, "resolution" : 4891.96981024998, "scale" : 18489297.737236},
+        {"level" : 4, "resolution" : 2445.98490512499, "scale" : 9244648.868618},
+        {"level" : 5, "resolution" : 1222.99245256249, "scale" : 4622324.434309},
+    ]
 
 	var initExtent = new esri.geometry.Extent({"xmin":-15440190.518952178,"ymin":-4384014.805557845,"xmax":16259773.85146766,"ymax":10174487.34974608,"spatialReference":{"wkid":102100}});
 
 	_map = new esri.Map("map",{
 		extent:initExtent,
-		wrapAround180:false
+		wrapAround180:false,
+        lods:lods
 	});
 
 	var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer");
@@ -49,9 +59,11 @@ var initMap = function(){
 
 	dojo.connect(_points,"onMouseOver",function(event){
 		_map.setCursor("pointer");
-        $("#closeButton").remove();
 		event.graphic.setSymbol(event.graphic.symbol.setHeight(30).setWidth(37).setOffset(10,14));
         $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + event.graphic.attributes.Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='images/thumbs/" + event.graphic.attributes.Thumb_URL + "' alt='" + event.graphic.attributes.Common_name + "'</td></tr></table>").data("attr",event.graphic.attributes);
+        $("#hoverInfo").mouseover(function(){
+            openPopout(event.graphic.attributes,true);
+        });
         positionHoverInfo(event.graphic.geometry);
         $(".speciesItem").each(function(){
             if($(this).data("attributes") === event.graphic.attributes){
@@ -76,6 +88,7 @@ var initMap = function(){
 	});
 
     dojo.connect(_map,"onPan",function(event){
+        hidePopup();
     });
 };
 
@@ -131,6 +144,9 @@ var addPoints = function(){
         $(".arrow").hide();
         $(this).children(".arrow").show();
         $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + $(this).data("attributes").Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='images/thumbs/" + $(this).data("attributes").Thumb_URL + "' alt='" + $(this).data("attributes").Common_name + "'</td></tr></table>").data("attr",$(this).data("attributes"));
+        $("#hoverInfo").mouseover(function(){
+            openPopout($(this).data("attributes"),true);
+        });
         positionHoverInfo($(this).data("geo"));
     });
 

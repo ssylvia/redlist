@@ -134,14 +134,24 @@ var getOppositeOrder = function(order){
 
 var openPopout = function(attr,newPopout){
     if(newPopout === true){
-        $("body").append("<div id='modalBackground'></div>");
-        $("body").append("<div id='speciesPanel'></div>");
+        $("body").append("<div id='modalBackground'></div><div id='speciesPanel'></div>");
         $("#modalBackground").fadeTo("slow","0.7");
-        $("#speciesPanel").fadeIn();
-        $("#speciesPanel").append("<div id='speciesMap' class='speciesContent'></div>");
-        $("#speciesPanel").append("<div id='speciesContent' class='speciesContent'></div>");
+        $("#speciesPanel").fadeIn().append("<div id='speciesMap' class='speciesContent'></div><div id='speciesContent' class='speciesContent'></div><div id='closeButton' class='ui-icons-close'>Close</div>");
         $(".speciesContent").css("height",$("#speciesPanel").height());
         $("#speciesMap").css("width",$("#speciesPanel").width() - 400);
+        $("#closeButton").button({
+            icons : {
+                primary : "ui-icon-closethick"
+            },
+            text:false
+        }).click(function(){
+            $("#modalBackground").fadeOut("fast");
+            $("#speciesPanel").fadeOut("fast");
+            setTimeout(function(){
+                $("#modalBackground").remove();
+                $("#speciesPanel").remove();
+            },200);
+        });
     }
     var order;
     if ($("#imgLinkOdd").length > 0){
@@ -232,7 +242,6 @@ var openPopout = function(attr,newPopout){
             $("#modalBackground").remove();
             $("#speciesPanel").remove();
         },200);
-
     });
 };
 
