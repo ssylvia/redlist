@@ -299,10 +299,12 @@ a{
 }
 
 .speciesImg{
+    display:none;
     width:400px;
 }
 
 .commonName{
+    display:none;
     position:absolute;
     background-color:#fff;
     width:300px;
@@ -332,14 +334,17 @@ a{
 }
 
 .sciName{
+    display:none;
     margin-top:15px;
 }
 
 .statusText{
+    display:none;
     border-bottom:1px solid #d81e05;
 }
 
 .speciesDescription{
+    display:none;
     position:absolute;
     padding:0 10px 0 30px;
     width:355px;
@@ -347,6 +352,7 @@ a{
 }
 
 .moreInfo{
+    display:none;
     position:absolute;
     color:#d81e05;
     left:45px;
@@ -361,6 +367,7 @@ a{
 
 .nextArrow{
     display:none;
+    display:none;
     position:absolute;
     width: 0;
     height: 0;
@@ -371,6 +378,7 @@ a{
 }
 
 .prevArrow{
+    display:none;
     display:none;
     position:absolute;
     width: 0;

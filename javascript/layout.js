@@ -153,20 +153,76 @@ var openPopout = function(attr,newPopout){
     }
     $("#speciesContent").append("<a id='imgLink"+order+"' href='"+attr.ArkiveURL+"' target='_blank'><img id='speciesImg"+order+"' class='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''></a>");
     $("#speciesImg"+order).load(function(){
-        $("#speciesContent").append("<div id='commonName"+order+"' class='commonName'>"+attr.Common_name+"</div>");
-        $("#speciesContent").append("<div id='sciName"+order+"' class='listingText sciName'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>").append("<div id='statusText"+order+"' class='listingText statusText'><span class='lsText'>STATUS: </span>"+attr.RLdescrpt+"</div>");
-        $("#speciesPanel").append("<div id='speciesDescription"+order+"' class='speciesDescription'>"+attr.Description+"</div>");
-        $("#speciesDescription"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + $("#statusText"+order).height() + 65).css("height",$("#speciesContent").height() - $("#speciesImg"+order).height() - $("#sciName"+order).height() - $("#statusText"+order).height() - 80);
-        $("#speciesPanel").append("<a id='moreInfo"+order+"' class='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></a><div id='nextArrow"+order+"' class='nextArrow'></div><div id='prevArrow"+order+"' class='prevArrow'></div>");
-        $("#moreInfo"+order).css("top",$("#speciesContent").height());
-        $("#nextArrow"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + 25).css("left",$("#sciName"+order).width() + 60).show().click(function(){
-        });
-        $("#prevArrow"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + 25).show().click(function(){
-        });
+        var delay;
+        if (newPopout === false){
+            delay = 200;
+        }
+        else{
+            delay = 0;
+        }
+        setTimeout(function() {
+            $("#speciesContent").append("<div id='commonName"+order+"' class='commonName'>"+attr.Common_name+"</div>");
+            $("#speciesContent").append("<div id='sciName"+order+"' class='listingText sciName'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>").append("<div id='statusText"+order+"' class='listingText statusText'><span class='lsText'>STATUS: </span>"+attr.RLdescrpt+"</div>");
+            $("#speciesPanel").append("<div id='speciesDescription"+order+"' class='speciesDescription'>"+attr.Description+"</div>");
+            $("#speciesDescription"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + $("#statusText"+order).height() + 65).css("height",$("#speciesContent").height() - $("#speciesImg"+order).height() - $("#sciName"+order).height() - $("#statusText"+order).height() - 80);
+            $("#speciesPanel").append("<a id='moreInfo"+order+"' class='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></a><div id='nextArrow"+order+"' class='nextArrow'></div><div id='prevArrow"+order+"' class='prevArrow'></div>");
+            $("#moreInfo"+order).css("top",$("#speciesContent").height()).fadeIn("fast");
+            $("#speciesImg"+order).fadeIn("fast");
+            $("#commonName"+order).fadeIn("fast");
+            $("#sciName"+order).fadeIn("fast");
+            $("#statusText"+order).fadeIn("fast");
+            $("#speciesDescription"+order).fadeIn("fast");
+            $("#nextArrow"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + 25).css("left",$("#sciName"+order).width() + 60).show().click(function(){
+                $("#imgLink"+order).fadeOut("fast");
+                $("#commonName"+order).fadeOut("fast");
+                $("#imgLink"+order).fadeOut("fast");
+                $("#sciName"+order).fadeOut("fast");
+                $("#statusText"+order).fadeOut("fast");
+                $("#speciesDescription"+order).fadeOut("fast");
+                $("#nextArrow"+order).fadeOut("fast");
+                $("#prevArrow"+order).fadeOut("fast");
+                $("#moreInfo"+order).fadeOut("fast");
+                setTimeout(function() {
+                    $("#imgLink"+order).remove();
+                    $("#commonName"+order).remove();
+                    $("#imgLink"+order).remove();
+                    $("#sciName"+order).remove();
+                    $("#statusText"+order).remove();
+                    $("#speciesDescription"+order).remove();
+                    $("#nextArrow"+order).remove();
+                    $("#prevArrow"+order).remove();
+                    $("#moreInfo"+order).remove();
+                }, 200);
+                nextSpecies(attr);
+            });
+            $("#prevArrow"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + 25).show().click(function(){
+                $("#imgLink"+order).fadeOut("fast");
+                $("#commonName"+order).fadeOut("fast");
+                $("#imgLink"+order).fadeOut("fast");
+                $("#sciName"+order).fadeOut("fast");
+                $("#statusText"+order).fadeOut("fast");
+                $("#speciesDescription"+order).fadeOut("fast");
+                $("#nextArrow"+order).fadeOut("fast");
+                $("#prevArrow"+order).fadeOut("fast");
+                $("#moreInfo"+order).fadeOut("fast");
+                setTimeout(function() {
+                    $("#imgLink"+order).remove();
+                    $("#commonName"+order).remove();
+                    $("#imgLink"+order).remove();
+                    $("#sciName"+order).remove();
+                    $("#statusText"+order).remove();
+                    $("#speciesDescription"+order).remove();
+                    $("#nextArrow"+order).remove();
+                    $("#prevArrow"+order).remove();
+                    $("#moreInfo"+order).remove();
+                }, 200);
+            });
+        },delay);
     });
 
-
-    initSpeciesMap(attr);
+    if(newPopout === true){
+        initSpeciesMap(attr);
+    }
 
     $("#modalBackground").click(function(){
         $("#modalBackground").fadeOut("fast");
@@ -201,7 +257,7 @@ var initSpeciesMap = function(attr){
   		{"level" : 3, "resolution" : 4891.96981024998, "scale" : 18489297.737236},
         {"level" : 4, "resolution" : 2445.98490512499, "scale" : 9244648.868618},
         {"level" : 5, "resolution" : 1222.99245256249, "scale" : 4622324.434309},
-  		{"level" : 6, "resolution" : 611.49622628138, "scale" : 2311162.217155}
+  		//{"level" : 6, "resolution" : 611.49622628138, "scale" : 2311162.217155}
         //{"level" : 7, "resolution" : 305.748113140558, "scale" : 1155581.108577},
         //{"level" : 8, "resolution" : 152.874056570411, "scale" : 577790.554289}
 	];
@@ -215,28 +271,52 @@ var initSpeciesMap = function(attr){
     var basemap= new esri.layers.ArcGISTiledMapServiceLayer("http://services.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer");
     _speciesMap.addLayer(basemap);
 
-    var outlineLayer = new esri.layers.FeatureLayer("http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/RedList_AllRanges/FeatureServer/0",{
+    _outlineLayer = new esri.layers.FeatureLayer("http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/RedList_AllRanges/FeatureServer/0",{
         mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
         outFields: ["*"]
     });
-    outlineLayer.setDefinitionExpression("TaxonID='"+attr.TaxonID+"'");
-    _speciesMap.addLayer(outlineLayer);
+    _outlineLayer.setDefinitionExpression("TaxonID='"+attr.TaxonID+"'");
+    _speciesMap.addLayer(_outlineLayer);
 
-    var fillLayer = new esri.layers.FeatureLayer("http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/RedList_AllRanges/FeatureServer/1",{
+    _fillLayer = new esri.layers.FeatureLayer("http://services.arcgis.com/nzS0F0zdNLvs7nc8/arcgis/rest/services/RedList_AllRanges/FeatureServer/1",{
         mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
         outFields: ["*"]
     });
-    fillLayer.setDefinitionExpression("TaxonID='"+attr.TaxonID+"'");
-    _speciesMap.addLayer(fillLayer);
+    _fillLayer.setDefinitionExpression("TaxonID='"+attr.TaxonID+"'");
+    _speciesMap.addLayer(_fillLayer);
 
     _speciesMap.firstLoad = false;
 
     dojo.connect(_speciesMap,"onUpdateEnd",function(){
         if (_speciesMap){
             _speciesMap.firstLoad = true;
-            _speciesMap.setExtent(_speciesMap.getLayer(_speciesMap.graphicsLayerIds[0]).graphics[0]._extent.expand(1.8));
+            if(_speciesMap.getLayer(_speciesMap.graphicsLayerIds[0]).graphics[0]){
+                _speciesMap.setExtent(_speciesMap.getLayer(_speciesMap.graphicsLayerIds[0]).graphics[0]._extent.expand(1.8));
+            }
         }
 
     });
 
+};
+
+var nextSpecies = function(attr){
+    var newAttr;
+    var index = attr.OBJECTID;
+    for (i=0; i < _points.graphics.length; i++){
+        if(newAttr === undefined){
+            if(index === _points.graphics.length - 1){
+                index = 0;
+            }
+            else{
+                index++;
+            }
+            if (_points.graphics[index].attributes.RLcategory === attr.RLcategory){
+                newAttr = _points.graphics[index].attributes;
+                _speciesMap.firstLoad = false;
+                _outlineLayer.setDefinitionExpression("TaxonID='"+newAttr.TaxonID+"'");
+                _fillLayer.setDefinitionExpression("TaxonID='"+newAttr.TaxonID+"'");
+                openPopout(newAttr,false);
+            }
+        }
+    }
 };
