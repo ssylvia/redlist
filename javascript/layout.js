@@ -298,7 +298,7 @@ var initSpeciesMap = function(attr){
     _speciesMap.firstLoad = false;
 
     dojo.connect(_speciesMap,"onUpdateEnd",function(){
-        if (_speciesMap){
+        if (_speciesMap.firstLoad === false){
             _speciesMap.firstLoad = true;
             if(_speciesMap.getLayer(_speciesMap.graphicsLayerIds[0]).graphics[0]){
                 _speciesMap.setExtent(_speciesMap.getLayer(_speciesMap.graphicsLayerIds[0]).graphics[0]._extent.expand(1.8));

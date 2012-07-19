@@ -16,7 +16,7 @@ var _map,
     _currentSpecies = [];
 
 var initMap = function(){
-    
+
     var lods = [
       	{"level" : 0, "resolution" : 39135.7584820001, "scale" : 147914381.897889},
         {"level" : 1, "resolution" : 19567.8792409999, "scale" : 73957190.948944},
@@ -94,48 +94,50 @@ var initMap = function(){
 
 var addPoints = function(){
 	dojo.forEach(_pointData.features,function(ftr){
-		var pt = new esri.geometry.Point( {"x": ftr.geometry.x, "y": ftr.geometry.y," spatialReference": {" wkid": 102100 } });
+        if (ftr.attributes.TaxonID !== 39332){
+    		var pt = new esri.geometry.Point( {"x": ftr.geometry.x, "y": ftr.geometry.y," spatialReference": {" wkid": 102100 } });
 
-		var attr = ftr.attributes;
+    		var attr = ftr.attributes;
 
-		var sym;
-		if(attr.Class === "MAMMALIA"){
-			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Mammal_icon.png', 31, 25).setOffset(8,12);
-		}
-		else if(attr.Class === "REPTILIA"){
-			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Reptile_icon.png', 31, 25).setOffset(8,12);
-		}
-		else if(attr.Class === "INSECTA"){
-			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Insect_icon.png', 31, 25).setOffset(8,12);
-		}
-		else if(attr.Class === "CRUSTACEA"){
-			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Crustacean_icon.png', 31, 25).setOffset(8,12);
-		}
-		else if(attr.Class === "GASTROPODA"){
-			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Gastropod_icon.png', 31, 25).setOffset(8,12);
-		}
-		else if(attr.Class === "AMPHIBIA"){
-			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Amphibian_icon.png', 31, 25).setOffset(8,12);
-		}
-		else if(attr.Kingdom === "PLANTAE"){
-			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Plant_icon.png', 31, 25).setOffset(8,12);
-		}
-		else{
-			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Fish_icon.png', 31, 25).setOffset(8,12);
-		}
+    		var sym;
+    		if(attr.Class === "MAMMALIA"){
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Mammal_icon.png', 31, 25).setOffset(8,12);
+    		}
+    		else if(attr.Class === "REPTILIA"){
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Reptile_icon.png', 31, 25).setOffset(8,12);
+    		}
+    		else if(attr.Class === "INSECTA"){
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Insect_icon.png', 31, 25).setOffset(8,12);
+    		}
+    		else if(attr.Class === "CRUSTACEA"){
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Crustacean_icon.png', 31, 25).setOffset(8,12);
+    		}
+    		else if(attr.Class === "GASTROPODA"){
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Gastropod_icon.png', 31, 25).setOffset(8,12);
+    		}
+    		else if(attr.Class === "AMPHIBIA"){
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Amphibian_icon.png', 31, 25).setOffset(8,12);
+    		}
+    		else if(attr.Kingdom === "PLANTAE"){
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Plant_icon.png', 31, 25).setOffset(8,12);
+    		}
+    		else{
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Fish_icon.png', 31, 25).setOffset(8,12);
+    		}
 
 
-		_points.add(new esri.Graphic(pt,sym,attr));
+    		_points.add(new esri.Graphic(pt,sym,attr));
 
-        $("body").append("<img id='img"+attr.OBJECTID+"' class='preloadImg' src='images/thumbs/"+attr.Thumb_URL+"' alt=''>");
-        $("#img"+attr.OBJECTID).load(function(){
-            $("#img"+attr.OBJECTID).remove();
-        });
+            $("body").append("<img id='img"+attr.OBJECTID+"' class='preloadImg' src='images/thumbs/"+attr.Thumb_URL+"' alt=''>");
+            $("#img"+attr.OBJECTID).load(function(){
+                $("#img"+attr.OBJECTID).remove();
+            });
 
-		$("#speciesList").append("<div id='species" + attr.OBJECTID + "' class='speciesItem'>" + attr.Common_name + "</div>");
-		$("#species"+attr.OBJECTID).data("attributes",attr);
-        $("#species"+attr.OBJECTID).data("geo",pt);
-        $("#species"+attr.OBJECTID).append("<span class='arrow'></span>");
+    		$("#speciesList").append("<div id='species" + attr.OBJECTID + "' class='speciesItem'>" + attr.Common_name + "</div>");
+    		$("#species"+attr.OBJECTID).data("attributes",attr);
+            $("#species"+attr.OBJECTID).data("geo",pt);
+            $("#species"+attr.OBJECTID).append("<span class='arrow'></span>");
+        }
 	});
 
     $(".speciesItem").mouseover(function(){
