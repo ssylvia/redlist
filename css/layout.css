@@ -369,7 +369,6 @@ a{
 
 .nextArrow{
     display:none;
-    display:none;
     position:absolute;
     width: 0;
     height: 0;
@@ -380,7 +379,6 @@ a{
 }
 
 .prevArrow{
-    display:none;
     display:none;
     position:absolute;
     width: 0;
@@ -394,6 +392,24 @@ a{
 .map{
     height:100%;
     width:100%;
+}
+
+.zoomToggle{
+    display:none;
+    position:absolute;
+	left:15px;
+	top:15px;
+	width:32px;
+	z-index:5;
+	cursor:pointer;
+}
+
+.zoomExtent{
+    margin-top:-3px;
+}
+
+.zoomOut{
+    margin-top:-3px;
 }
 
 .preloadImg{

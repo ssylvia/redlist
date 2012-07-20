@@ -1,4 +1,69 @@
+if (("onhashchange" in window) && !($.browser.msie)) {
+    window.onhashchange = function () {
+        if(window.location.hash === "#overview" && $("#modalBackground").is(":visible")){
+            $("#modalBackground").fadeOut("fast");
+            $("#speciesPanel").fadeOut("fast");
+            setTimeout(function(){
+                $("#modalBackground").remove();
+                $("#speciesPanel").remove();
+            },200);
+        }
+        else{
+            if (_currentSelection !== window.location.hash && window.location.hash !== "#overview"){
+                var order;
+                if ($("#imgLinkOdd").length > 0){
+                    order = "Odd";
+                }
+                else{
+                    order = "Even";
+
+                }
+                if($("#modalBackground").is(":visible")){
+                    dojo.forEach(_points.graphics,function(g){
+                    	if("#"+g.attributes.TaxonID === window.location.hash){
+                            $("#imgLink"+order).fadeOut("fast");
+                            $("#commonName"+order).fadeOut("fast");
+                            $("#imgLink"+order).fadeOut("fast");
+                            $("#sciName"+order).fadeOut("fast");
+                            $("#statusText"+order).fadeOut("fast");
+                            $("#speciesDescription"+order).fadeOut("fast");
+                            $("#nextArrow"+order).fadeOut("fast");
+                            $("#prevArrow"+order).fadeOut("fast");
+                            $("#moreInfo"+order).fadeOut("fast");
+                            setTimeout(function() {
+                                $("#imgLink"+order).remove();
+                                $("#commonName"+order).remove();
+                                $("#imgLink"+order).remove();
+                                $("#sciName"+order).remove();
+                                $("#statusText"+order).remove();
+                                $("#speciesDescription"+order).remove();
+                                $("#nextArrow"+order).remove();
+                                $("#prevArrow"+order).remove();
+                                $("#moreInfo"+order).remove();
+                            }, 200);
+                            _speciesMap.firstLoad = false;
+                            _outlineLayer.setDefinitionExpression("TaxonID='"+g.attributes.TaxonID+"'");
+                            _fillLayer.setDefinitionExpression("TaxonID='"+g.attributes.TaxonID+"'");
+                			openPopout(g.attributes,false);
+                		}
+                	});
+                }
+            }
+        }
+    };
+}
+else {
+    var prevHash = window.location.hash;
+    window.setInterval(function () {
+        if (window.location.hash != prevHash) {
+            storedHash = window.location.hash;
+            alert(window.location.hash);
+        }
+    }, 100);
+}
+
 $(document).ready(function(e) {
+    window.location.hash = "overview";
 	$(".selection").click(function(e) {
 		$(".selection").removeClass("selected");
 		$(this).addClass("selected");
@@ -133,12 +198,15 @@ var getOppositeOrder = function(order){
 };
 
 var openPopout = function(attr,newPopout){
+    _currentSelection = "#"+attr.TaxonID;
+    window.location.hash = attr.TaxonID;
     if(newPopout === true){
         $("body").append("<div id='modalBackground'></div><div id='speciesPanel'></div>");
         $("#modalBackground").fadeTo("slow","0.7");
         $("#speciesPanel").fadeIn().append("<div id='speciesMap' class='speciesContent'></div><div id='speciesContent' class='speciesContent'></div><div id='closeButton' class='ui-icons-close'>Close</div>");
         $(".speciesContent").css("height",$("#speciesPanel").height());
-        $("#speciesMap").css("width",$("#speciesPanel").width() - 400);
+        $("#speciesMap").css("width",$("#speciesPanel").width() - 400).append("<div id='zoomToggleMini' class='zoomToggle'><img id='zoomInMini' class='zoomIn' src='images/ZoomLight_01.png'><img id='zoomExtentMini' class='zoomExtent' src='images/ZoomLight_02.png'><img id='zoomOutMini' class='zoomOut' src='images/ZoomLight_03.png'></div>");
+        $("#zoomToggleMini").css("margin-left",415).css("margin-top",15).show();
         $("#closeButton").button({
             icons : {
                 primary : "ui-icon-closethick"
@@ -150,6 +218,7 @@ var openPopout = function(attr,newPopout){
             setTimeout(function(){
                 $("#modalBackground").remove();
                 $("#speciesPanel").remove();
+                window.location.hash = "overview";
             },200);
         });
     }
@@ -241,6 +310,7 @@ var openPopout = function(attr,newPopout){
         setTimeout(function(){
             $("#modalBackground").remove();
             $("#speciesPanel").remove();
+            window.location.hash = "overview";
         },200);
     });
 };
@@ -299,12 +369,22 @@ var initSpeciesMap = function(attr){
 
     dojo.connect(_speciesMap,"onUpdateEnd",function(){
         if (_speciesMap.firstLoad === false){
-            _speciesMap.firstLoad = true;
             if(_speciesMap.getLayer(_speciesMap.graphicsLayerIds[0]).graphics[0]){
+                _speciesMap.firstLoad = true;
                 _speciesMap.setExtent(_speciesMap.getLayer(_speciesMap.graphicsLayerIds[0]).graphics[0]._extent.expand(1.8));
             }
         }
 
+    });
+
+    $("#zoomInMini").click(function(){
+        _speciesMap.setLevel(_speciesMap.getLevel()+1);
+    });
+    $("#zoomOutMini").click(function(){
+        _speciesMap.setLevel(_speciesMap.getLevel()-1);
+    });
+    $("#zoomExtentMini").click(function(){
+        _speciesMap.setExtent(_speciesMap.getLayer(_speciesMap.graphicsLayerIds[0]).graphics[0]._extent.expand(1.8));
     });
 
 };

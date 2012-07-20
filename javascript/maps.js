@@ -13,6 +13,7 @@ var _map,
     _speciesMap,
     _outlineLayer,
     _fillLayer,
+    _currentSelection,
     _currentSpecies = [];
 
 var initMap = function(){
@@ -54,6 +55,7 @@ var initMap = function(){
 
 	dojo.connect(_map, 'onLoad', function(theMap) {
 		//resize the map when the browser resizes
+        $("#zoomToggle").show();
 		dojo.connect(dijit.byId('map'), 'resize', _map,_map.resize);
 	});
 
@@ -89,6 +91,16 @@ var initMap = function(){
 
     dojo.connect(_map,"onPan",function(event){
         hidePopup();
+    });
+
+    $("#zoomIn").click(function(){
+        _map.setLevel(_map.getLevel()+1);
+    });
+    $("#zoomOut").click(function(){
+        _map.setLevel(_map.getLevel()-1);
+    });
+    $("#zoomExtent").click(function(){
+        _map.setExtent(initExtent);
     });
 };
 
