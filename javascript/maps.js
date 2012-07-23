@@ -24,8 +24,8 @@ var initMap = function(){
       	{"level" : 2, "resolution" : 9783.93962049996, "scale" : 36978595.474472},
   		{"level" : 3, "resolution" : 4891.96981024998, "scale" : 18489297.737236},
         {"level" : 4, "resolution" : 2445.98490512499, "scale" : 9244648.868618},
-        {"level" : 5, "resolution" : 1222.99245256249, "scale" : 4622324.434309},
-    ]
+        {"level" : 5, "resolution" : 1222.99245256249, "scale" : 4622324.434309}
+    ];
 
 	var initExtent = new esri.geometry.Extent({"xmin":-15440190.518952178,"ymin":-4384014.805557845,"xmax":16259773.85146766,"ymax":10174487.34974608,"spatialReference":{"wkid":102100}});
 
@@ -49,7 +49,7 @@ var initMap = function(){
 			g.hide();
 		}
         else{
-            _currentSpecies.push(g.attributes)
+            _currentSpecies.push(g.attributes);
         }
 	});
 
@@ -226,10 +226,31 @@ var sortGraphics = function(){
 };
 
 var positionHoverInfo = function(grp){
-    var popupHeight = $("#arrowCon").height();
 
-    $("#hoverInfo").css("left",_map.toScreen(grp).x - 13).css("top",_map.toScreen(grp).y + 17)
-    $("#hoverInfoPointer").css("left",_map.toScreen(grp).x-13).css("top",_map.toScreen(grp).y + 2)
+    var popupHeight = $("#hoverInfo").height() + $("#hoverInfoPointer").height();
+    var popupWidth = $("#hoverInfo").width();
+
+    if (_map.toScreen(grp).y < popupHeight + 20){
+        $("#hoverInfo").css("top",_map.toScreen(grp).y + 17);
+        $("#hoverInfoPointer").css("top",_map.toScreen(grp).y + 2);
+        $("#hoverInfoPointer").css("border-top","none");
+        $("#hoverInfoPointer").css("border-bottom","15px solid #fff");
+    }
+    else{
+        $("#hoverInfo").css("top",_map.toScreen(grp).y - popupHeight - 44);
+        $("#hoverInfoPointer").css("top",_map.toScreen(grp).y - 44);
+        $("#hoverInfoPointer").css("border-bottom","none");
+        $("#hoverInfoPointer").css("border-top","15px solid #fff");
+    }
+
+    if ($("#map").width() - _map.toScreen(grp).x < popupWidth + 20){
+        $("#hoverInfo").css("left",_map.toScreen(grp).x - popupWidth + 16);
+    }
+    else{
+        $("#hoverInfo").css("left",_map.toScreen(grp).x - 13);
+    }
+    $("#hoverInfoPointer").css("left",_map.toScreen(grp).x-13);
+
     $("#hoverInfo").show();
     $("#hoverInfoPointer").show();
 };
