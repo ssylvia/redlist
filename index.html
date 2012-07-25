@@ -33,6 +33,14 @@
         <script type="text/javascript" src="javascript/maps.js"></script>
         <script type="text/javascript" src="javascript/layout.js"></script>
         <script type="text/javascript">
+            var iPad = false;
+            $(document).ready(function(e) {
+    		    if(navigator.userAgent.match(/iPad/i) != null){
+                    iPad = true;
+                }
+            });
+    	</script>
+        <script type="text/javascript">
             var configOptions;
 
             function init(){

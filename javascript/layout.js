@@ -254,8 +254,8 @@ var openPopout = function(attr,newPopout){
         $("#modalBackground").fadeTo("slow","0.7");
         $("#speciesPanel").fadeIn().append("<div id='speciesMap' class='speciesContent'></div><div id='speciesContent' class='speciesContent'></div><div id='closeButton' class='ui-icons-close'>Close</div>");
         $(".speciesContent").css("height",$("#speciesPanel").height());
-        $("#speciesMap").css("width",$("#speciesPanel").width() - 400).append("<div id='zoomToggleMini' class='zoomToggle'><img id='zoomInMini' class='zoomIn' src='images/ZoomLight_01.png'><img id='zoomExtentMini' class='zoomExtent' src='images/ZoomLight_02.png'><img id='zoomOutMini' class='zoomOut' src='images/ZoomLight_03.png'></div>");
-        $("#zoomToggleMini").css("margin-left",415).css("margin-top",15).show();
+        $("#speciesMap").css("width",$("#speciesPanel").width() - getWidth()).append("<div id='zoomToggleMini' class='zoomToggle'><img id='zoomInMini' class='zoomIn' src='images/ZoomLight_01.png'><img id='zoomExtentMini' class='zoomExtent' src='images/ZoomLight_02.png'><img id='zoomOutMini' class='zoomOut' src='images/ZoomLight_03.png'></div>");
+        $("#zoomToggleMini").css("margin-left",getWidth() + 15).css("margin-top",15).show();
         $("#closeButton").button({
             icons : {
                 primary : "ui-icon-closethick"
@@ -278,7 +278,8 @@ var openPopout = function(attr,newPopout){
     else{
         order = "Odd";
     }
-    $("#speciesContent").append("<a id='imgLink"+order+"' href='"+attr.ArkiveURL+"' target='_blank'><img id='speciesImg"+order+"' class='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''></a>");
+    $("#speciesContent").append("<a id='imgLink"+order+"' href='"+attr.ArkiveURL+"' target='_blank'><img id='speciesImg"+order+"' class='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''></a>").css("width",getWidth());
+    $(".speciesImg").css("width",getWidth());
     $("#speciesImg"+order).load(function(){
         var delay;
         if (newPopout === false){
@@ -291,9 +292,12 @@ var openPopout = function(attr,newPopout){
             $("#speciesContent").append("<div id='commonName"+order+"' class='commonName'>"+attr.Common_name+"</div>");
             $("#speciesContent").append("<div id='sciName"+order+"' class='listingText sciName'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>").append("<div id='statusText"+order+"' class='listingText statusText'><span class='lsText'>RED LIST STATUS: </span>"+attr.RLdescrpt+"</div>");
             $("#speciesPanel").append("<div id='speciesDescription"+order+"' class='speciesDescription'>"+attr.Description+"</div>");
+            $(".listingText").css("width",300 - (400 - getWidth()));
             $("#speciesDescription"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + $("#statusText"+order).height() + 65).css("height",$("#speciesContent").height() - $("#speciesImg"+order).height() - $("#sciName"+order).height() - $("#statusText"+order).height() - 80);
             $("#speciesPanel").append("<a id='moreInfo"+order+"' class='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></a><div id='nextArrow"+order+"' class='nextArrow'></div><div id='prevArrow"+order+"' class='prevArrow'></div>");
             $("#moreInfo"+order).css("top",$("#speciesContent").height()).fadeIn("fast");
+            $(".speciesDescription").css("width",355 - (400 - getWidth()));
+            $(".commonName").css("width",300 - (400 - getWidth()));
             $("#speciesImg"+order).fadeIn("fast");
             $("#commonName"+order).fadeIn("fast");
             $("#sciName"+order).fadeIn("fast");
@@ -474,3 +478,12 @@ var prevSpecies = function(attr){
         }
     }
 };
+
+var getWidth = function(){
+    if (iPad === true){
+        return 280;
+    }
+    else{
+        return 400;
+    }
+}
