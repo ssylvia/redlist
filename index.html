@@ -37,6 +37,11 @@
             $(document).ready(function(e) {
     		    if(navigator.userAgent.match(/iPad/i) != null){
                     iPad = true;
+                    $(".zoomExtent").css("margin-top","-4px");
+                    $(".zoomOut").css("margin-top","-4px");
+                }
+                if(iPad === false){
+                    window.location.hash = "overview";
                 }
             });
     	</script>

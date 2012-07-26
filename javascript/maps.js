@@ -64,6 +64,8 @@ var initMap = function(){
 		event.graphic.setSymbol(event.graphic.symbol.setHeight(30).setWidth(37).setOffset(10,14));
         $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + event.graphic.attributes.Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='images/thumbs/" + event.graphic.attributes.Thumb_URL + "' alt='" + event.graphic.attributes.Common_name + "'</td></tr></table>").data("attr",event.graphic.attributes);
         $("#hoverInfo").mouseover(function(){
+            $("#modalBackground").remove();
+            $("#speciesPanel").remove();
             openPopout(event.graphic.attributes,true);
         });
         positionHoverInfo(event.graphic.geometry);
@@ -159,6 +161,8 @@ var addPoints = function(){
         $(this).children(".arrow").show();
         $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + $(this).data("attributes").Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='images/thumbs/" + $(this).data("attributes").Thumb_URL + "' alt='" + $(this).data("attributes").Common_name + "'</td></tr></table>").data("attr",$(this).data("attributes"));
         $("#hoverInfo").mouseover(function(){
+            $("#modalBackground").remove();
+            $("#speciesPanel").remove();
             openPopout($(this).data("attributes"),true);
         });
         positionHoverInfo($(this).data("geo"));

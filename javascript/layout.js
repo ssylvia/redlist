@@ -55,7 +55,7 @@ if (("onhashchange" in window) && !($.browser.msie)) {
 else {
     var prevHash = window.location.hash;
     window.setInterval(function () {
-        if (window.location.hash != prevHash) {
+        if (window.location.hash !== prevHash) {
             storedHash = window.location.hash;
             if(window.location.hash === "#overview" && $("#modalBackground").is(":visible")){
             $("#modalBackground").fadeOut("fast");
@@ -112,7 +112,6 @@ else {
 }
 
 $(document).ready(function(e) {
-    window.location.hash = "overview";
 	$(".selection").click(function(e) {
 		$(".selection").removeClass("selected");
 		$(this).addClass("selected");
@@ -248,13 +247,19 @@ var getOppositeOrder = function(order){
 
 var openPopout = function(attr,newPopout){
     _currentSelection = "#"+attr.TaxonID;
-    window.location.hash = attr.TaxonID;
+    if (iPad === false){
+        window.location.hash = attr.TaxonID;
+    }
     if(newPopout === true){
         $("body").append("<div id='modalBackground'></div><div id='speciesPanel'></div>");
         $("#modalBackground").fadeTo("slow","0.7");
         $("#speciesPanel").fadeIn().append("<div id='speciesMap' class='speciesContent'></div><div id='speciesContent' class='speciesContent'></div><div id='closeButton' class='ui-icons-close'>Close</div>");
         $(".speciesContent").css("height",$("#speciesPanel").height());
         $("#speciesMap").css("width",$("#speciesPanel").width() - getWidth()).append("<div id='zoomToggleMini' class='zoomToggle'><img id='zoomInMini' class='zoomIn' src='images/ZoomLight_01.png'><img id='zoomExtentMini' class='zoomExtent' src='images/ZoomLight_02.png'><img id='zoomOutMini' class='zoomOut' src='images/ZoomLight_03.png'></div>");
+        if (iPad === true) {
+            $(".zoomExtent").css("margin-top","-4px");
+            $(".zoomOut").css("margin-top","-4px");
+        }
         $("#zoomToggleMini").css("margin-left",getWidth() + 15).css("margin-top",15).show();
         $("#closeButton").button({
             icons : {
@@ -266,8 +271,11 @@ var openPopout = function(attr,newPopout){
             $("#speciesPanel").fadeOut("fast");
             setTimeout(function(){
                 $("#modalBackground").remove();
+                $("#speciesPanel").html("");
                 $("#speciesPanel").remove();
-                window.location.hash = "overview";
+                if (iPad === false){
+                    window.location.hash = "overview";
+                }
             },200);
         });
     }
@@ -362,7 +370,9 @@ var openPopout = function(attr,newPopout){
         setTimeout(function(){
             $("#modalBackground").remove();
             $("#speciesPanel").remove();
-            window.location.hash = "overview";
+            if (iPad === false){
+                window.location.hash = "overview";
+            }
         },200);
     });
 };
