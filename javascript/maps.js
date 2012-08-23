@@ -61,7 +61,7 @@ var initMap = function(){
 
 	dojo.connect(_points,"onMouseOver",function(event){
 		_map.setCursor("pointer");
-		event.graphic.setSymbol(event.graphic.symbol.setHeight(30).setWidth(37).setOffset(10,14));
+		event.graphic.setSymbol(event.graphic.symbol.setHeight(30).setWidth(45).setOffset(10,0));
         $("#hoverInfo").html("").append("<table><tr><td id='speciesName'>" + event.graphic.attributes.Common_name + "</td><td id='arrowCon' rowspan='2'><div id='popupArrow'></div></tr><tr><td id='thumbnailCon'><img id='speciesThmb' src='images/thumbs/" + event.graphic.attributes.Thumb_URL + "' alt='" + event.graphic.attributes.Common_name + "'</td></tr></table>").data("attr",event.graphic.attributes);
         $("#hoverInfo").mouseover(function(){
             $("#modalBackground").remove();
@@ -83,7 +83,7 @@ var initMap = function(){
 
 	dojo.connect(_points,"onMouseOut",function(event){
 		_map.setCursor("default");
-		event.graphic.setSymbol(event.graphic.symbol.setHeight(25).setWidth(31).setOffset(8,12));
+		event.graphic.setSymbol(event.graphic.symbol.setHeight(25).setWidth(38).setOffset(8,0));
         hidePopup();
 	});
 
@@ -115,28 +115,28 @@ var addPoints = function(){
 
     		var sym;
     		if(attr.Class === "MAMMALIA"){
-    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Mammal_icon.png', 31, 25).setOffset(8,12);
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Mammal_icon.png', 38, 25).setOffset(8,0);
     		}
     		else if(attr.Class === "REPTILIA"){
-    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Reptile_icon.png', 31, 25).setOffset(8,12);
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Reptile_icon.png', 38, 25).setOffset(8,0);
     		}
     		else if(attr.Class === "INSECTA"){
-    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Insect_icon.png', 31, 25).setOffset(8,12);
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Insect_icon.png', 38, 25).setOffset(8,0);
     		}
     		else if(attr.Class === "CRUSTACEA"){
-    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Crustacean_icon.png', 31, 25).setOffset(8,12);
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Crustacean_icon.png', 38, 25).setOffset(8,0);
     		}
     		else if(attr.Class === "GASTROPODA"){
-    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Gastropod_icon.png', 31, 25).setOffset(8,12);
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Gastropod_icon.png', 38, 25).setOffset(8,0);
     		}
     		else if(attr.Class === "AMPHIBIA"){
-    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Amphibian_icon.png', 31, 25).setOffset(8,12);
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Amphibian_icon.png', 38, 25).setOffset(8,0);
     		}
     		else if(attr.Kingdom === "PLANTAE"){
-    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Plant_icon.png', 31, 25).setOffset(8,12);
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Plant_icon.png', 38, 25).setOffset(8,0);
     		}
     		else{
-    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Fish_icon.png', 31, 25).setOffset(8,12);
+    			sym = new esri.symbol.PictureMarkerSymbol('images/icons/Fish_icon.png', 38, 25).setOffset(8,0);
     		}
 
 
@@ -235,14 +235,14 @@ var positionHoverInfo = function(grp){
     var popupWidth = $("#hoverInfo").width();
 
     if (_map.toScreen(grp).y < popupHeight + 20){
-        $("#hoverInfo").css("top",_map.toScreen(grp).y + 17);
-        $("#hoverInfoPointer").css("top",_map.toScreen(grp).y + 2);
+        $("#hoverInfo").css("top",_map.toScreen(grp).y + 28);
+        $("#hoverInfoPointer").css("top",_map.toScreen(grp).y + 13);
         $("#hoverInfoPointer").css("border-top","none");
         $("#hoverInfoPointer").css("border-bottom","15px solid #fff");
     }
     else{
-        $("#hoverInfo").css("top",_map.toScreen(grp).y - popupHeight - 44);
-        $("#hoverInfoPointer").css("top",_map.toScreen(grp).y - 44);
+        $("#hoverInfo").css("top",_map.toScreen(grp).y - popupHeight - 28);
+        $("#hoverInfoPointer").css("top",_map.toScreen(grp).y - 28);
         $("#hoverInfoPointer").css("border-bottom","none");
         $("#hoverInfoPointer").css("border-top","15px solid #fff");
     }
