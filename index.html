@@ -43,6 +43,10 @@
                 if(iPad === false){
                     window.location.hash = "overview";
                 }
+                if ( $.browser.mozilla == true){
+                    $(".zoomExtent").css("margin-top","-5px");
+                    $(".zoomOut").css("margin-top","-4px");
+                }
             });
     	</script>
         <script type="text/javascript">
