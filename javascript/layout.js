@@ -298,7 +298,7 @@ var openPopout = function(attr,newPopout){
         }
         setTimeout(function() {
             $("#speciesContent").append("<div id='commonName"+order+"' class='commonName'>"+attr.Common_name+"</div>");
-            $("#speciesContent").append("<div id='sciName"+order+"' class='listingText sciName'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>").append("<div id='statusText"+order+"' class='listingText statusText'><span class='lsText'>RED LIST STATUS: </span>"+attr.RLdescrpt+"</div>");
+            $("#speciesContent").append("<div id='sciName"+order+"' class='listingText sciName'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>").append("<div id='statusText"+order+"' class='listingText statusText'><span class='lsText'>IUCN RED LIST STATUS: </span>"+attr.RLdescrpt+"</div>");
             $("#speciesPanel").append("<div id='speciesDescription"+order+"' class='speciesDescription'>"+attr.Description+"</div>");
             $(".listingText").css("width",300 - (400 - getWidth()));
             $("#speciesDescription"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + $("#statusText"+order).height() + 65).css("height",$("#speciesContent").height() - $("#speciesImg"+order).height() - $("#sciName"+order).height() - $("#statusText"+order).height() - 80);
