@@ -1675,3 +1675,250 @@ var _pointData ={
     }
   ]
 };
+
+var photoCredits =[
+    {
+		"TaxonID": "7949",
+		"Photographer": "Patricia D. Moehlman"
+	},
+	{
+		"TaxonID": "9676",
+		"Photographer": "James Morgan"
+	},
+	{
+		"TaxonID": "16559",
+		"Photographer": "H. Katsu"
+	},
+	{
+		"TaxonID": "22066",
+		"Photographer": "Robyn Appleton"
+	},
+	{
+		"TaxonID": "39332",
+		"Photographer": "Simon Rogerson"
+	},
+	{
+		"TaxonID": "3083",
+		"Photographer": "Richard K. B. Jenkins/Madagasikara"
+	},
+	{
+		"TaxonID": "7140",
+		"Photographer": "Ajay Desai"
+	},
+	{
+		"TaxonID": "6557",
+		"Photographer": "Lowveld Rhino Trust, Zimbabwe"
+	},
+	{
+		"TaxonID": "64385",
+		"Photographer": "Wink Emmerson"
+	},
+	{
+		"TaxonID": "43995",
+		"Photographer": "Christoph Scheidegger"
+	},
+	{
+		"TaxonID": "12973",
+		"Photographer": "Luiz Ricardo L. Simone"
+	},
+	{
+		"TaxonID": "30394",
+		"Photographer": "Helena Maratheftis"
+	},
+	{
+		"TaxonID": "41586",
+		"Photographer": "Kevinschafer.com"
+	},
+	{
+		"TaxonID": "19513",
+		"Photographer": "Jaime Bosch"
+	},
+	{
+		"TaxonID": "63658",
+		"Photographer": "Christian Randrianantoandro"
+	},
+	{
+		"TaxonID": "55202",
+		"Photographer": "Karl-Heinz Jungfer"
+	},
+	{
+		"TaxonID": "5953",
+		"Photographer": "Bruce Kekule / brucekekule.com"
+	},
+	{
+		"TaxonID": "61484",
+		"Photographer": "Robert Sindaco"
+	},
+	{
+		"TaxonID": "14288",
+		"Photographer": "Merlin D. Tuttle, Bat Conservation International, www.batcon.org"
+	},
+	{
+		"TaxonID": "14870997",
+		"Photographer": "Paolo Fontana"
+	},
+	{
+		"TaxonID": "14018",
+		"Photographer": "Tiit Maran"
+	},
+	{
+		"TaxonID": "5760",
+		"Photographer": "Luke Dollar"
+	},
+	{
+		"TaxonID": "18144",
+		"Photographer": "Carly Vynne"
+	},
+	{
+		"TaxonID": "19705",
+		"Photographer": "Galen Rathbun, California Academy of Sciences"
+	},
+	{
+		"TaxonID": "195409",
+		"Photographer": "Àthila Bertoncini - athilapeixe.com"
+	},
+	{
+		"TaxonID": "7950",
+		"Photographer": "Patricia D. Moehlman"
+	},
+	{
+		"TaxonID": "136309",
+		"Photographer": "Francesco Rovero, MTSN"
+	},
+	{
+		"TaxonID": "6234",
+		"Photographer": "Tim Wacher"
+	},
+	{
+		"TaxonID": "20321",
+		"Photographer": "Jose Nunez-Mino, Durrell"
+	},
+	{
+		"TaxonID": "7030",
+		"Photographer": "Bernal Rodriguez-Herrera"
+	},
+	{
+		"TaxonID": "10054",
+		"Photographer": "Werner Flueck"
+	},
+	{
+		"TaxonID": "14136",
+		"Photographer": "Merlin D. Tuttle, Bat Conservation International, www.batcon.org"
+	},
+	{
+		"TaxonID": "1089",
+		"Photographer": "Craig Jackson"
+	},
+	{
+		"TaxonID": "54837",
+		"Photographer": "Timothy Herman"
+	},
+	{
+		"TaxonID": "136791",
+		"Photographer": "Tim Davenport / WCS"
+	},
+	{
+		"TaxonID": "5481",
+		"Photographer": "Merlin D. Tuttle, Bat Conservation International, www.batcon.org"
+	},
+	{
+		"TaxonID": "9251",
+		"Photographer": "Rudiger Sachs and Neil Cumberlidge"
+	},
+	{
+		"TaxonID": "9251",
+		"Photographer": "Rudiger Sachs and Neil Cumberlidge"
+	},
+	{
+		"TaxonID": "18732",
+		"Photographer": "James Morgan"
+	},
+	{
+		"TaxonID": "6852",
+		"Photographer": "Paul Brock"
+	},
+	{
+		"TaxonID": "59450",
+		"Photographer": "Twan Leenders"
+	},
+	{
+		"TaxonID": "21472",
+		"Photographer": "Anders Goncalves da Silva"
+	},
+	{
+		"TaxonID": "3036",
+		"Photographer": "Adriano G Chiarello"
+	},
+	{
+		"TaxonID": "41630",
+		"Photographer": "Carlos Benhur Kasper"
+	},
+	{
+		"TaxonID": "3339",
+		"Photographer": "Linda Broome"
+	},
+	{
+		"TaxonID": "10952",
+		"Photographer": "Rick Hudson"
+	},
+	{
+		"TaxonID": "2994",
+		"Photographer": "Kevinschafer.com"
+	},
+	{
+		"TaxonID": "11622",
+		"Photographer": "R. A. Mittermeier"
+	},
+	{
+		"TaxonID": "15188",
+		"Photographer": "Bob Jenkins"
+	},
+	{
+		"TaxonID": "3747",
+		"Photographer": "Kim Wheeler, Red Wolf Coalition"
+	},
+	{
+		"TaxonID": "3989",
+		"Photographer": "Nik Cole, Durrell Wildlife Conservation Trust"
+	},
+	{
+		"TaxonID": "19832",
+		"Photographer": "N J Singh"
+	},
+	{
+		"TaxonID": "59203",
+		"Photographer": "Ted Papenfuss"
+	},
+	{
+		"TaxonID": "56289",
+		"Photographer": "D. Lin, California Academy of Sciences"
+	},
+	{
+		"TaxonID": "60286",
+		"Photographer": "Robert Ketelaar"
+	},
+	{
+		"TaxonID": "9760",
+		"Photographer": "G. Fredriksson"
+	},
+	{
+		"TaxonID": "11790",
+		"Photographer": "Arturo Carrillo Reyes"
+	},
+	{
+		"TaxonID": "169395",
+		"Photographer": "Roman Slaboch"
+	},
+	{
+		"TaxonID": "15955",
+		"Photographer": "Alex Sliwa"
+	},
+	{
+		"TaxonID": "57334",
+		"Photographer": "Ignacio De La Riva"
+	},
+	{
+		"TaxonID": "5957",
+		"Photographer": "Zhou Ting, William P. McCord, & Torsten Blanck"
+	}
+];
