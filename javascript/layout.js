@@ -261,6 +261,9 @@ var openPopout = function(attr,newPopout){
             $(".zoomOut").css("margin-top","-4px");
         }
         $("#zoomToggleMini").css("margin-left",getWidth() + 15).css("margin-top",15).show();
+        if ( $.browser.mozilla == true){
+            $("#zoomOutMini").css("margin-top","-4px");
+        }
         $("#closeButton").button({
             icons : {
                 primary : "ui-icon-closethick"
