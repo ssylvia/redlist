@@ -37,6 +37,7 @@
             $(document).ready(function(e) {
     		    if(navigator.userAgent.match(/iPad/i) != null){
                     iPad = true;
+                    $("#topPanel").css("height",340);
                     $(".zoomExtent").css("margin-top","-4px");
                     $(".zoomOut").css("margin-top","-4px");
                 }
@@ -46,7 +47,7 @@
                 if ( $.browser.mozilla == true){
                     $(".zoomExtent").css("margin-top","-5px");
                     $(".zoomOut").css("margin-top","-4px");
-                    $("#zoomOutMini").css("margin-top","-4px");
+                    $("#topPanel").css("height",340);
                 }
             });
     	</script>
