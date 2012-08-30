@@ -286,6 +286,15 @@ var openPopout = function(attr,newPopout){
     else{
         order = "Odd";
     }
+
+    var photoright;
+    console.log(attr.TaxonID);
+    dojo.forEach(photoCredits,function(p){
+        if (attr.TaxonID == p.TaxonID){
+            photoright = p.Photographer;
+        }
+    });
+
     $("#speciesContent").append("<a id='imgLink"+order+"' href='"+attr.ArkiveURL+"' target='_blank'><img id='speciesImg"+order+"' class='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''></a>").css("width",getWidth());
     $("#speciesImg"+order).load(function(){
         var delay;
@@ -296,22 +305,24 @@ var openPopout = function(attr,newPopout){
             delay = 0;
         }
         setTimeout(function() {
-            $("#speciesContent").append("<img id='threatScale"+order+"' class='threatScale' src='images/scales/"+attr.RLcategory+".png' alt=''>");
+            $("#speciesContent").append("<p id='photoCredit"+order+"' class='photoCredit'>© "+photoright+"</p><img id='threatScale"+order+"' class='threatScale' src='images/scales/"+attr.RLcategory+".png' alt=''>");
             $("#speciesContent").append("<div id='commonName"+order+"' class='commonName'>"+attr.Common_name+"</div>");
-            $("#speciesContent").append("<div id='sciName"+order+"' class='listingText sciName'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>");
+            $("#speciesContent").append("<div id='sciName"+order+"' class='listingText sciName'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div><div id='nextArrow"+order+"' class='nextArrow'></div><div id='prevArrow"+order+"' class='prevArrow'></div>");
             $("#speciesContent").append("<div id='speciesDescription"+order+"' class='speciesDescription'>"+attr.Description+"</div>");
             $(".listingText").css("width",300 - (400 - getWidth()));
-            $("#speciesContent").append("<a id='moreInfo"+order+"' class='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></a><div id='nextArrow"+order+"' class='nextArrow'></div><div id='prevArrow"+order+"' class='prevArrow'></div>");
+            $("#speciesContent").append("<a id='moreInfo"+order+"' class='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></a>");
             $("#moreInfo"+order).css("top",$("#speciesContent").height()).fadeIn("fast");
             $(".commonName").css("width",300 - (400 - getWidth()));
             $("#speciesImg"+order).fadeIn("fast");
+            $("#photoCredit"+order).fadeIn("fast");
             $("#threatScale"+order).fadeIn("fast");
             $("#commonName"+order).fadeIn("fast");
             $("#sciName"+order).fadeIn("fast");
             $("#statusText"+order).fadeIn("fast");
             $("#speciesDescription"+order).fadeIn("fast");
-            $("#nextArrow"+order).show().click(function(){
+            $("#nextArrow"+order).css("margin-top",-30 - (($("#sciName"+order).height()-25)/2)).show().click(function(){
                 $("#imgLink"+order).fadeOut("fast");
+                $("#photoCredit"+order).fadeOut("fast");
                 $("#threatScale"+order).fadeOut("fast");
                 $("#commonName"+order).fadeOut("fast");
                 $("#imgLink"+order).fadeOut("fast");
@@ -323,6 +334,7 @@ var openPopout = function(attr,newPopout){
                 $("#moreInfo"+order).fadeOut("fast");
                 setTimeout(function() {
                     $("#imgLink"+order).remove();
+                    $("#photoCredit"+order).remove();
                     $("#threatScale"+order).remove();
                     $("#commonName"+order).remove();
                     $("#imgLink"+order).remove();
@@ -335,8 +347,9 @@ var openPopout = function(attr,newPopout){
                 }, 200);
                 nextSpecies(attr);
             });
-            $("#prevArrow"+order)show().click(function(){
+            $("#prevArrow"+order).show().click(function(){
                 $("#imgLink"+order).fadeOut("fast");
+                $("#photoCredit"+order).fadeOut("fast");
                 $("#commonName"+order).fadeOut("fast");
                 $("#imgLink"+order).fadeOut("fast");
                 $("#sciName"+order).fadeOut("fast");
@@ -347,6 +360,7 @@ var openPopout = function(attr,newPopout){
                 $("#moreInfo"+order).fadeOut("fast");
                 setTimeout(function() {
                     $("#imgLink"+order).remove();
+                    $("#photoCredit"+order).remove();
                     $("#commonName"+order).remove();
                     $("#imgLink"+order).remove();
                     $("#sciName"+order).remove();
