@@ -303,7 +303,6 @@ var openPopout = function(attr,newPopout){
             $(".listingText").css("width",300 - (400 - getWidth()));
             $("#speciesContent").append("<a id='moreInfo"+order+"' class='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></a><div id='nextArrow"+order+"' class='nextArrow'></div><div id='prevArrow"+order+"' class='prevArrow'></div>");
             $("#moreInfo"+order).css("top",$("#speciesContent").height()).fadeIn("fast");
-            $(".speciesDescription").css("width",355 - (400 - getWidth()));
             $(".commonName").css("width",300 - (400 - getWidth()));
             $("#speciesImg"+order).fadeIn("fast");
             $("#threatScale"+order).fadeIn("fast");
@@ -336,7 +335,7 @@ var openPopout = function(attr,newPopout){
                 }, 200);
                 nextSpecies(attr);
             });
-            $("#prevArrow"+order).click(function(){
+            $("#prevArrow"+order)show().click(function(){
                 $("#imgLink"+order).fadeOut("fast");
                 $("#commonName"+order).fadeOut("fast");
                 $("#imgLink"+order).fadeOut("fast");
