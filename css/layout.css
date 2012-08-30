@@ -298,26 +298,27 @@ a{
 #speciesContent{
     width:400px;
     float:left;
+    overflow:auto;
 }
 
 .speciesImg{
     display:none;
-    width:400px;
+    width:100%;
+}
+
+.threatScale{
+    display:none;
+    width:90%;
+    margin:-25px 0 0 5%;
 }
 
 .commonName{
     display:none;
-    position:absolute;
     background-color:#fff;
-    width:300px;
-    padding:5px;
     color:#f00;
     font-weight:bold;
     font-size:16px;
     font-family:Arial, Helvetica, sans-serif;
-    margin:-33px 0 0 25px;
-    -webkit-border-radius: 5px 5px 0px 0px;
-    border-radius: 5px 5px 0px 0px;
 }
 
 #speciesMap{
@@ -325,9 +326,8 @@ a{
 }
 
 .listingText{
-    margin-left:30px;
-    width:300px;
     border-top:1px solid #d81e05;
+    border-bottom:1px solid #d81e05;
     padding:2px 0 2px 0;
 }
 
@@ -337,7 +337,6 @@ a{
 
 .sciName{
     display:none;
-    margin-top:15px;
 }
 
 .statusText{
@@ -347,17 +346,11 @@ a{
 
 .speciesDescription{
     display:none;
-    position:absolute;
-    padding:0 10px 0 30px;
-    width:355px;
-    overflow:auto;
 }
 
 .moreInfo{
     display:none;
-    position:absolute;
     color:#d81e05;
-    left:45px;
     font-size:12px;
     text-decoration:none;
     font-family:Arial, Helvetica, sans-serif;
@@ -369,7 +362,6 @@ a{
 
 .nextArrow{
     display:none;
-    position:absolute;
     width: 0;
     height: 0;
 	border-top: 15px solid transparent;
@@ -380,7 +372,6 @@ a{
 
 .prevArrow{
     display:none;
-    position:absolute;
     width: 0;
     height: 0;
     border-top: 15px solid transparent;

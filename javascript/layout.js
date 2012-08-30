@@ -287,7 +287,6 @@ var openPopout = function(attr,newPopout){
         order = "Odd";
     }
     $("#speciesContent").append("<a id='imgLink"+order+"' href='"+attr.ArkiveURL+"' target='_blank'><img id='speciesImg"+order+"' class='speciesImg' src='images/photos/"+attr.Photo_URL+"' alt=''></a>").css("width",getWidth());
-    $(".speciesImg").css("width",getWidth());
     $("#speciesImg"+order).load(function(){
         var delay;
         if (newPopout === false){
@@ -297,22 +296,24 @@ var openPopout = function(attr,newPopout){
             delay = 0;
         }
         setTimeout(function() {
+            $("#speciesContent").append("<img id='threatScale"+order+"' class='threatScale' src='images/scales/"+attr.RLcategory+".png' alt=''>");
             $("#speciesContent").append("<div id='commonName"+order+"' class='commonName'>"+attr.Common_name+"</div>");
-            $("#speciesContent").append("<div id='sciName"+order+"' class='listingText sciName'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>").append("<div id='statusText"+order+"' class='listingText statusText'><span class='lsText'>IUCN RED LIST STATUS: </span>"+attr.RLdescrpt+"</div>");
-            $("#speciesPanel").append("<div id='speciesDescription"+order+"' class='speciesDescription'>"+attr.Description+"</div>");
+            $("#speciesContent").append("<div id='sciName"+order+"' class='listingText sciName'><span class='lsText'>SCIENTIFIC NAME: </span><em>"+attr.Latin_name+"</em></div>");
+            $("#speciesContent").append("<div id='speciesDescription"+order+"' class='speciesDescription'>"+attr.Description+"</div>");
             $(".listingText").css("width",300 - (400 - getWidth()));
-            $("#speciesDescription"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + $("#statusText"+order).height() + 65).css("height",$("#speciesContent").height() - $("#speciesImg"+order).height() - $("#sciName"+order).height() - $("#statusText"+order).height() - 80);
-            $("#speciesPanel").append("<a id='moreInfo"+order+"' class='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></a><div id='nextArrow"+order+"' class='nextArrow'></div><div id='prevArrow"+order+"' class='prevArrow'></div>");
+            $("#speciesContent").append("<a id='moreInfo"+order+"' class='moreInfo' href='"+attr.RedListURL+"' target='_blank'><em>More Information &gt;</em></a><div id='nextArrow"+order+"' class='nextArrow'></div><div id='prevArrow"+order+"' class='prevArrow'></div>");
             $("#moreInfo"+order).css("top",$("#speciesContent").height()).fadeIn("fast");
             $(".speciesDescription").css("width",355 - (400 - getWidth()));
             $(".commonName").css("width",300 - (400 - getWidth()));
             $("#speciesImg"+order).fadeIn("fast");
+            $("#threatScale"+order).fadeIn("fast");
             $("#commonName"+order).fadeIn("fast");
             $("#sciName"+order).fadeIn("fast");
             $("#statusText"+order).fadeIn("fast");
             $("#speciesDescription"+order).fadeIn("fast");
-            $("#nextArrow"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + 25).css("left",$("#sciName"+order).width() + 60).show().click(function(){
+            $("#nextArrow"+order).show().click(function(){
                 $("#imgLink"+order).fadeOut("fast");
+                $("#threatScale"+order).fadeOut("fast");
                 $("#commonName"+order).fadeOut("fast");
                 $("#imgLink"+order).fadeOut("fast");
                 $("#sciName"+order).fadeOut("fast");
@@ -323,6 +324,7 @@ var openPopout = function(attr,newPopout){
                 $("#moreInfo"+order).fadeOut("fast");
                 setTimeout(function() {
                     $("#imgLink"+order).remove();
+                    $("#threatScale"+order).remove();
                     $("#commonName"+order).remove();
                     $("#imgLink"+order).remove();
                     $("#sciName"+order).remove();
@@ -334,7 +336,7 @@ var openPopout = function(attr,newPopout){
                 }, 200);
                 nextSpecies(attr);
             });
-            $("#prevArrow"+order).css("top",$("#speciesImg"+order).height() + $("#sciName"+order).height() + 25).show().click(function(){
+            $("#prevArrow"+order).click(function(){
                 $("#imgLink"+order).fadeOut("fast");
                 $("#commonName"+order).fadeOut("fast");
                 $("#imgLink"+order).fadeOut("fast");
@@ -491,7 +493,7 @@ var prevSpecies = function(attr){
 
 var getWidth = function(){
     if (iPad === true){
-        return 280;
+        return 400;
     }
     else{
         return 400;
