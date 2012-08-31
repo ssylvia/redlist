@@ -111,16 +111,35 @@ else {
     }, 100);
 }
 
+var getStringText = function(str){
+    var s = str.split("<br>");
+    var newString;
+    for (i=0; i<s.length;i++){
+        if (i==0){
+            newString = s[i];
+        }
+        else{
+            newString = newString + " " + s[i];
+        }
+    }
+    return newString;
+};
+
 $(document).ready(function(e) {
 	$(".selection").click(function(e) {
-		$(".selection").removeClass("selected");
-		$(this).addClass("selected");
-        var left;
-		left = $(this).position().left + (($(this).width() - 140)/2 + 10);
-		$("#selectorImg").animate({"left":left},"fast");
-		$("#selectedText").html($(this).html());
-		_selPos = $(this);
-		sortGraphics();
+        if($(this).html() != "NOT<br>EVALUATED" && $(this).html() != "DATA<br>DEFICIENT" && $(this).html() != "EXTINCT IN<br>THE WILD" && $(this).html() != "EXTINCT"){
+    		$(".selection").removeClass("selected");
+    		$(this).addClass("selected");
+            var left;
+    		left = $(this).position().left + (($(this).width() - 140)/2 + 10);
+    		$("#selectorImg").animate({"left":left},"fast");
+    		$("#selectedText").html($(this).html());
+    		_selPos = $(this);
+    		sortGraphics();
+        }
+        else{
+            alert("No data currently available for \""+getStringText($(this).html())+"\" IUCN Redlist category.");
+        }
     });
     $("#selectorImg").draggable({
 		axis : "x",
@@ -206,12 +225,24 @@ var resetLayout = function(){
 	}
     if($(document).width() >= 1680){
         $("#selector").css("font-size","12px");
+        $("#selectorImg").css("height",140).css("width",140).css("background","url(images/slider.png)");
+        $("#selectedText").css("padding","22px").css("font-size","13px");
+        $("#selectorCon").css("height",120);
+        $("#selector").css("margin-top",20);
     }
     else if($(document).width() >= 1024){
         $("#selector").css("font-size","10px");
+        $("#selectorImg").css("height",140).css("width",140).css("background","url(images/slider.png)");
+        $("#selectedText").css("padding","22px").css("font-size","13px");
+        $("#selectorCon").css("height",120);
+        $("#selector").css("margin-top",20);
     }
     else{
         $("#selector").css("font-size","8px");
+        $("#selectorImg").css("height",90).css("width",90).css("background","url(images/sliderSmall.png)");
+        $("#selectedText").css("padding",0).css("font-size","8px");
+        $("#selectorCon").css("height",90);
+        $("#selector").css("margin-top",10);
     }
     dijit.byId("mainWindow").layout();
 };

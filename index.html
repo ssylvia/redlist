@@ -51,12 +51,24 @@
                 }
                 if($(document).width() >= 1680){
                     $("#selector").css("font-size","12px");
+                    $("#selectorImg").css("height",140).css("width",140).css("background","url(images/slider.png)");
+                    $("#selectedText").css("padding","22px").css("font-size","13px");
+                    $("#selectorCon").css("height",120);
+                    $("#selector").css("margin-top",20);
                 }
                 else if($(document).width() >= 1024){
                     $("#selector").css("font-size","10px");
+                    $("#selectorImg").css("height",140).css("width",140).css("background","url(images/slider.png)");
+                    $("#selectedText").css("padding","22px").css("font-size","13px");
+                    $("#selectorCon").css("height",120);
+                    $("#selector").css("margin-top",20);
                 }
                 else{
                     $("#selector").css("font-size","8px");
+                    $("#selectorImg").css("height",90).css("width",90).css("background","url(images/sliderSmall.png)");
+                    $("#selectedText").css("padding",0).css("font-size","8px");
+                    $("#selectorCon").css("height",90);
+                    $("#selector").css("margin-top",10);
                 }
             });
     	</script>
