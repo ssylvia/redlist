@@ -204,6 +204,16 @@ var resetLayout = function(){
 	else {
 		$("#selectorImg").css("left",$("#vuFull").position().left + (($("#vuFull").width() - 140)/2) + 10);
 	}
+    if($(document).width() >= 1680){
+        $("#selector").css("font-size","12px");
+    }
+    else if($(document).width() >= 1024){
+        $("#selector").css("font-size","10px");
+    }
+    else{
+        $("#selector").css("font-size","8px");
+    }
+    dijit.byId("mainWindow").layout();
 };
 
 var checkSelection = function(){

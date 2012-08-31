@@ -49,6 +49,15 @@
                     $(".zoomOut").css("margin-top","-4px");
                     $("#topPanel").css("height",340);
                 }
+                if($(document).width() >= 1680){
+                    $("#selector").css("font-size","12px");
+                }
+                else if($(document).width() >= 1024){
+                    $("#selector").css("font-size","10px");
+                }
+                else{
+                    $("#selector").css("font-size","8px");
+                }
             });
     	</script>
         <script type="text/javascript">
@@ -127,10 +136,10 @@
                     <div id="selectorCon" dojotype="dijit.layout.ContentPane" region="bottom">
                     	<table id="selector">
                         	<tr>
-                            	<!--<td class="selection sc greyScheme">NOT EVALUATED</td><td class="selection sc greyScheme">DATA DEFICIENT</td>--><td id="lcFull" class="selection sc whiteScheme">LEAST<br>CONCERN</td><td id="ntFull" class="selection sc whiteScheme">NEAR<br>THREATENED</td><td id="vuFull" class="selection selected sc whiteScheme">VULNERABLE</td><td id="enFull" class="selection sc whiteScheme">ENDANGERED</td><td id="crFull" class="selection sc whiteScheme">CRITICALLY<br>ENDANGERED</td><!--<td class="selection sc whiteScheme">EXTINCT IN THE WILD</td><td class="selection sc blackScheme">EXTINCT</td>-->
+                            	<td class="selection sc greyScheme">NOT<br>EVALUATED</td><td class="selection sc greyScheme">DATA<br>DEFICIENT</td><td id="lcFull" class="selection sc whiteScheme">LEAST<br>CONCERN</td><td id="ntFull" class="selection sc whiteScheme">NEAR<br>THREATENED</td><td id="vuFull" class="selection selected sc whiteScheme">VULNERABLE</td><td id="enFull" class="selection sc whiteScheme">ENDANGERED</td><td id="crFull" class="selection sc whiteScheme">CRITICALLY<br>ENDANGERED</td><td class="selection sc whiteScheme">EXTINCT IN<br>THE WILD</td><td class="selection sc blackScheme">EXTINCT</td>
                             </tr>
                             <tr>
-                            	<!--<td class="sc">NE</td><td class="sc">DD</td>--><td class="sc">LC</td><td class="sc">NT</td><td class="sc">VU</td><td class="sc">EN</td><td class="sc">CR</td><!--<td class="sc">EW</td><td class="sc">EX</td>-->
+                            	<td class="sc">NE</td><td class="sc">DD</td><td class="sc">LC</td><td class="sc">NT</td><td class="sc">VU</td><td class="sc">EN</td><td class="sc">CR</td><td class="sc">EW</td><td class="sc">EX</td>
                             </tr>
                         </table>
                     </div><!--/selectorCon-->
