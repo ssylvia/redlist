@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.1/js/dojo/dijit/themes/tundra/tundra.css">
         <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.1/js/esri/dijit/css/Popup.css">
         <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.20.custom.css"/>
+        <link rel="stylesheet" type="text/css" href="css/tipTip.css"/>
         <link rel="stylesheet" type="text/css" href="css/layout.css"/>
 
 
@@ -29,6 +30,7 @@
         <script type="text/javascript" src="javascript/jquery.ui.mouse.min.js"></script>
         <script type="text/javascript" src="javascript/jquery.ui.draggable.min.js"></script>
         <script type="text/javascript" src="javascript/jquery.ui.touch-punch.min.js"></script>
+        <script type="text/javascript" src="javascript/jquery.tipTip.minified.js"></script>
         <script type="text/javascript" src="javascript/JSONdata.js"></script>
         <script type="text/javascript" src="javascript/maps.js"></script>
         <script type="text/javascript" src="javascript/layout.js"></script>
@@ -148,7 +150,7 @@
                     <div id="selectorCon" dojotype="dijit.layout.ContentPane" region="bottom">
                     	<table id="selector">
                         	<tr>
-                            	<td class="selection sc greyScheme">NOT<br>EVALUATED</td><td class="selection sc greyScheme">DATA<br>DEFICIENT</td><td id="lcFull" class="selection sc whiteScheme">LEAST<br>CONCERN</td><td id="ntFull" class="selection sc whiteScheme">NEAR<br>THREATENED</td><td id="vuFull" class="selection selected sc whiteScheme">VULNERABLE</td><td id="enFull" class="selection sc whiteScheme">ENDANGERED</td><td id="crFull" class="selection sc whiteScheme">CRITICALLY<br>ENDANGERED</td><td class="selection sc whiteScheme">EXTINCT IN<br>THE WILD</td><td class="selection sc blackScheme">EXTINCT</td>
+                            	<td id="neFull" class="selection sc greyScheme tiptip">NOT<br>EVALUATED</td><td id="ddFull" class="selection sc greyScheme tiptip">DATA<br>DEFICIENT</td><td id="lcFull" class="selection sc whiteScheme">LEAST<br>CONCERN</td><td id="ntFull" class="selection sc whiteScheme">NEAR<br>THREATENED</td><td id="vuFull" class="selection selected sc whiteScheme">VULNERABLE</td><td id="enFull" class="selection sc whiteScheme">ENDANGERED</td><td id="crFull" class="selection sc whiteScheme">CRITICALLY<br>ENDANGERED</td><td id="ewFull" class="selection sc whiteScheme tiptip">EXTINCT IN<br>THE WILD</td><td id="exFull" class="selection sc blackScheme tiptip">EXTINCT</td>
                             </tr>
                             <tr>
                             	<td class="sc">NE</td><td class="sc">DD</td><td class="sc">LC</td><td class="sc">NT</td><td class="sc">VU</td><td class="sc">EN</td><td class="sc">CR</td><td class="sc">EW</td><td class="sc">EX</td>

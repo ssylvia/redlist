@@ -167,6 +167,7 @@ a{
 }
 
 #arrowCon{
+    display:none;
     padding:5px;
 }
 
@@ -431,4 +432,8 @@ a{
 
 .preloadImg{
     display:none;
+}
+
+#tiptip_content{
+    text-align:center;
 }

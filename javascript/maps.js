@@ -14,7 +14,8 @@ var _map,
     _outlineLayer,
     _fillLayer,
     _currentSelection,
-    _currentSpecies = [];
+    _currentSpecies = [],
+    _currentCat = "VU";
 
 var initMap = function(){
 

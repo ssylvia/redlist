@@ -126,6 +126,11 @@ var getStringText = function(str){
 };
 
 $(document).ready(function(e) {
+    $(".tiptip").tipTip({
+        defaultPosition:"top",
+        delay:0,
+        content:"No Species<br>Available"
+    });
 	$(".selection").click(function(e) {
         if($(this).html() != "NOT<br>EVALUATED" && $(this).html() != "DATA<br>DEFICIENT" && $(this).html() != "EXTINCT IN<br>THE WILD" && $(this).html() != "EXTINCT"){
     		$(".selection").removeClass("selected");
@@ -138,7 +143,7 @@ $(document).ready(function(e) {
     		sortGraphics();
         }
         else{
-            alert("No data currently available for \""+getStringText($(this).html())+"\" IUCN Redlist category.");
+            //alert("No data currently available for \""+getStringText($(this).html())+"\" IUCN Redlist category.");
         }
     });
     $("#selectorImg").draggable({
@@ -146,26 +151,70 @@ $(document).ready(function(e) {
 		containment : "#selector",
 		drag : function(){
             hidePopup();
-			if(checkSelection() === "LC"){
+            if(checkSelection() === "NE"){
+    			$("#selectedText").html("NOT<br>EVALUATED");
+                if(_currentCat != "NE"){
+                    $("#neFull").trigger("mouseover");
+                    $("#tiptip_holder").css("margin-top",parseFloat($("#tiptip_holder").css("margin-top").split("px")[0])-($("#selectorImg").height()/2)+($("#neFull").height()/2)+3);
+                }
+                _currentCat = "NE";
+			}
+    		else if(checkSelection() === "DD"){
+				$("#selectedText").html("DATA<br>DEFICIENT");
+                if(_currentCat != "DD"){
+                    $("#ddFull").trigger("mouseover");
+                    $("#tiptip_holder").css("margin-top",parseFloat($("#tiptip_holder").css("margin-top").split("px")[0])-($("#selectorImg").height()/2)+($("#ddFull").height()/2)+3);
+                }
+                _currentCat = "DD";
+			}
+			else if(checkSelection() === "LC"){
 				$("#selectedText").html("LEAST<br>CONCERN");
+                _currentCat = "LC";
+                hideTooltip();
 			}
 			else if(checkSelection() === "NT"){
 				$("#selectedText").html("NEAR<br>THREATENED");
+                _currentCat = "NT";
+                hideTooltip();
 			}
 			else if(checkSelection() === "VU"){
 				$("#selectedText").html("VULNERABLE");
+                _currentCat = "VU";
+                hideTooltip();
 			}
 			else if(checkSelection() === "EN"){
 				$("#selectedText").html("ENDANGERED");
+                _currentCat = "EN";
+                hideTooltip();
+			}
+    		else if(checkSelection() === "CR"){
+				$("#selectedText").html("CRITICALLY<br>ENDANGERED");
+                _currentCat = "CR";
+                hideTooltip();
+			}
+            else if(checkSelection() === "EW"){
+    			$("#selectedText").html("EXTINCT IN<br>THE WILD");
+                if(_currentCat != "EW"){
+                    $("#ewFull").trigger("mouseover");
+                    $("#tiptip_holder").css("margin-top",parseFloat($("#tiptip_holder").css("margin-top").split("px")[0])-($("#selectorImg").height()/2)+($("#ewFull").height()/2)+3);
+                }
+                _currentCat = "EW";
 			}
 			else{
-				$("#selectedText").html("CRITICALLY ENDANGERED");
+				$("#selectedText").html("EXTINCT");
+                if(_currentCat != "EX"){
+                    $("#exFull").trigger("mouseover");
+                    $("#tiptip_holder").css("margin-top",parseFloat($("#tiptip_holder").css("margin-top").split("px")[0])-($("#selectorImg").height()/2)+($("#exFull").height()/2)+3);
+                }
+                _currentCat = "EX";
 			}
 		},
 		stop : function(){
+            hideTooltip();
 			var left;
 			$(".selection").removeClass("selected");
-			if(checkSelection() == "LC"){
+			if(checkSelection() === "LC" || checkSelection() === "NE" || checkSelection() === "DD"){
+        		$("#selectedText").html("LEAST<br>CONCERN");
 				$("#lcFull").addClass("selected");
 				left = $("#lcFull").position().left + (($("#lcFull").width() - $("#selectorImg").width())/2 + 10);
 				$("#selectorImg").animate({"left":left},100);
@@ -190,6 +239,7 @@ $(document).ready(function(e) {
 				_selPos = $("#enFull");
 			}
 			else{
+    			$("#selectedText").html("CRITICALLY<br>ENDANGERED");
 				$("#crFull").addClass("selected");
 				left = $("#crFull").position().left + (($("#crFull").width() - $("#selectorImg").width())/2 + 10);
 				$("#selectorImg").animate({"left":left},100);
@@ -199,6 +249,13 @@ $(document).ready(function(e) {
 		}
 	});
 });
+
+var hideTooltip = function(){
+    $("#neFull").trigger("mouseout");
+    $("#ddFull").trigger("mouseout");
+    $("#ewFull").trigger("mouseout");
+    $("#exFull").trigger("mouseout");
+};
 
 $(window).resize(function(){
     resetLayout();
@@ -248,12 +305,22 @@ var resetLayout = function(){
 
 var checkSelection = function(){
 	var selectorLeft = $("#selectorImg").position().left + ($("#selectorImg").width()/2);
+    var ne = $("#neFull").position().left+$("#neFull").width();
+    var dd = $("#ddFull").position().left+$("#ddFull").width();
 	var lc = $("#lcFull").position().left+$("#lcFull").width();
 	var nt = $("#ntFull").position().left+$("#ntFull").width();
 	var vu = $("#vuFull").position().left+$("#vuFull").width();
 	var en = $("#enFull").position().left+$("#enFull").width();
-	if (selectorLeft <= lc){
-		return "LC";
+    var cr = $("#crFull").position().left+$("#crFull").width();
+    var ew = $("#ewFull").position().left+$("#ewFull").width();
+	if (selectorLeft <= ne){
+		return "NE";
+	}
+    else if (selectorLeft <= dd){
+    	return "DD";
+	}
+    else if (selectorLeft <= lc){
+    	return "LC";
 	}
 	else if (selectorLeft <= nt){
 		return "NT";
@@ -264,8 +331,14 @@ var checkSelection = function(){
 	else if (selectorLeft <= en){
 		return "EN";
 	}
+    else if (selectorLeft <= cr){
+    	return "CR";
+	}
+    else if (selectorLeft <= ew){
+    	return "EW";
+	}
 	else{
-		return"CR";
+		return"EX";
 	}
 };
 
