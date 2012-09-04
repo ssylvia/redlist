@@ -41,6 +41,8 @@ var initMap = function(){
 	_points = new esri.layers.GraphicsLayer();
 	_map.addLayer(_points);
 
+    _map.isLoaded = false;
+
 	addPoints();
 
     _currentSpecies = [];
