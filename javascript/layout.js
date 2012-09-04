@@ -300,6 +300,10 @@ var resetLayout = function(){
         $("#selectorCon").css("height",90);
         $("#selector").css("margin-top",10);
     }
+
+    $(".speciesContent").css("height",$("#speciesPanel").height());
+    $("#speciesMap").css("width",$("#speciesPanel").width() - getWidth() - 1).css("height",$("#speciesPanel").height());
+
     dijit.byId("mainWindow").layout();
 };
 
@@ -368,7 +372,7 @@ var openPopout = function(attr,newPopout){
         $("#modalBackground").fadeTo("slow","0.7");
         $("#speciesPanel").fadeIn().append("<div id='speciesMap' class='speciesContent'></div><div id='speciesContent' class='speciesContent'></div><div id='closeButton' class='ui-icons-close'>Close</div>");
         $(".speciesContent").css("height",$("#speciesPanel").height());
-        $("#speciesMap").css("width",$("#speciesPanel").width() - getWidth()).append("<div id='zoomToggleMini' class='zoomToggle'><img id='zoomInMini' class='zoomIn' src='images/ZoomLight_01.png'><img id='zoomExtentMini' class='zoomExtent' src='images/ZoomLight_02.png'><img id='zoomOutMini' class='zoomOut' src='images/ZoomLight_03.png'></div>");
+        $("#speciesMap").css("width",$("#speciesPanel").width() - getWidth() - 1).append("<div id='zoomToggleMini' class='zoomToggle'><img id='zoomInMini' class='zoomIn' src='images/ZoomLight_01.png'><img id='zoomExtentMini' class='zoomExtent' src='images/ZoomLight_02.png'><img id='zoomOutMini' class='zoomOut' src='images/ZoomLight_03.png'></div>");
         if (iPad === true) {
             $(".zoomExtent").css("margin-top","-4px");
             $(".zoomOut").css("margin-top","-4px");
@@ -569,6 +573,10 @@ var initSpeciesMap = function(attr){
         }
 
     });
+
+    dojo.connect(_speciesMap, 'onLoad', function(theMap) {
+		dojo.connect(dijit.byId('map'), 'resize', _speciesMap,_speciesMap.resize);
+	});
 
     $("#zoomInMini").click(function(){
         _speciesMap.setLevel(_speciesMap.getLevel()+1);
