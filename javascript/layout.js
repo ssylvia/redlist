@@ -635,4 +635,12 @@ var getWidth = function(){
     else{
         return 400;
     }
-}
+};
+
+var sortList = function(){
+    _pointData.features.sort(function(a,b){
+        if(a.attributes.Common_name<b.attributes.Common_name) return -1;
+        if(a.attributes.Common_name>b.attributes.Common_name) return 1;
+        return 0;
+    });
+};

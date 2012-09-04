@@ -44,6 +44,7 @@ var initMap = function(){
 
     _map.isLoaded = false;
 
+    sortList();
 	addPoints();
 
     _currentSpecies = [];
@@ -71,6 +72,9 @@ var initMap = function(){
             $("#speciesPanel").remove();
             openPopout(event.graphic.attributes,true);
         });
+        if(iPad === true){
+            $("#arrowCon").css("display","table-cell");
+        }
         positionHoverInfo(event.graphic.geometry);
         $(".speciesItem").each(function(){
             if($(this).data("attributes") === event.graphic.attributes){
@@ -168,6 +172,9 @@ var addPoints = function(){
             $("#speciesPanel").remove();
             openPopout($(this).data("attributes"),true);
         });
+        if(iPad === true){
+            $("#arrowCon").css("display","table-cell");
+        }
         positionHoverInfo($(this).data("geo"));
     });
 
