@@ -497,6 +497,7 @@ var _pointData ={
         "y" : -138080.34907478726
       }
     },
+    /*
     {
       "attributes" : {
         "OBJECTID" : 14,
@@ -525,6 +526,7 @@ var _pointData ={
         "y" : -1389099.6524797992
       }
     },
+    */
     {
       "attributes" : {
         "OBJECTID" : 15,
