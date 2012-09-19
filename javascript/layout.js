@@ -103,7 +103,7 @@ else {
         	});
         }
         else {
-            if (window.location.hash !== _currentSelection){
+            if (window.location.hash !== _currentSelection && window.location.hash !== "#overview"){
                 window.history.back();
             }
         }
